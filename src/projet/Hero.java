@@ -107,7 +107,7 @@ public class Hero extends Character{
 	}
 		
 	public void look() {
-		
+		this.showHP();
 		System.out.println(this.getCurrentRoom().descriptif());
 	}
 	
@@ -156,6 +156,19 @@ public class Hero extends Character{
 				System.out.println(obj.toString());
 			}
 		}
+	}
+	
+	public void showHP() {
+		int level = this.getHP();
+		System.out.print("HP : [");
+		for (int i = 0; i < 100; i++) {
+			if(i <= level) {
+				System.out.print("#");
+			} else {
+				System.out.print("-");
+			}
+		}
+		System.out.println("] " + level + "%\n");
 	}
 	
 }
