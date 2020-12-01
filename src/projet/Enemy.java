@@ -7,7 +7,7 @@ package projet;
 public class Enemy extends Character implements Attackable{
 
 	public Enemy(String name) {
-		super(name);	
+		super(name, Projet.ANSI_RED);
 	}
 
 	@Override
@@ -15,6 +15,15 @@ public class Enemy extends Character implements Attackable{
 		
 	}
 
+
+	@Override
+	public void beAttacked(int damage) {
+		this.editHP(damage);
+		this.showHP();
+		// on verifie le hero est toujours vivant
+		this.die();
+	}
+	
 	@Override
 	public void attack(Attackable target) {
 		String detail = "DOH ! you've been attacked by "+ this.getName()+ ", with a ";
@@ -36,12 +45,11 @@ public class Enemy extends Character implements Attackable{
 	}
 
 	@Override
-	public void beAttacked(int damage) {
-		this.editHP(damage);
-		this.showHP();
-		// on verifie le hero est toujours vivant
-		this.die();
+	public void attack(Attackable target, Object object) {
+		target.beAttacked(object.getHealthEffect());	
+		
 	}
+
 	
     
 }

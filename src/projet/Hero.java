@@ -70,9 +70,26 @@ public class Hero extends Character implements Attackable{
 			break;
 		}
 		case "attack": {
-			this.attack((Attackable) this.enemyInRoom());
+			// si il n'y a pas d'ennemie ou que l'ennemie est mort
+			Enemy target = this.enemyInRoom();
+			if(target != null || !target.isAlive) {
+				System.out.println("No ennemy alive here ! you can go ");
+				break;
+			}
+				
+			// sinon, on l'attaque avec l'objet en argument
+			try {
+				Object obj= this.findObjectInventory(argv[1]);
+			    this.attack((Attackable) this.enemyInRoom(), obj);
+			    
+			} catch (ArrayIndexOutOfBoundsException e) {
+				
+				this.attack((Attackable) this.enemyInRoom());
+			}
 			break;
 		}
+		
+		
 		default:
 			System.out.println("!!! Action incorrect !!!");
 		}
@@ -225,24 +242,23 @@ public class Hero extends Character implements Attackable{
 			System.out.println("What do you want to use to attack");
 			this.showInventory();
 			
-			String s = choice.nextLine();
+			String s = choice.next();
 			Object obj = findObjectInventory(s);
 			
-			// si l'objet existe bien dans l'inventaire
-			if(obj != null) {
-				target.beAttacked(obj.getHealthEffect());
-				//this.inventory.remove(obj);
-			// sinon coup-de-poing
-			} else {
-				System.out.println("let's punch him");
-				target.beAttacked(-1);
-			}
-			
-		} else {
-			// sinon on frappe la cible avec un coup-de-poing ( un coup-de-poing implique -1 point de vie)
-			target.beAttacked(-1);
-		}
+			this.attack(target, obj);
 		
+		}
+	}
+
+	@Override
+	public void attack(Attackable target, Object object) {
+		if (object == null) {
+			System.out.println("let's punch him");
+			target.beAttacked(-1);
+		} else {
+			target.beAttacked(object.getHealthEffect());
+			//this.inventory.remove(object);
+		}
 		
 	}
 

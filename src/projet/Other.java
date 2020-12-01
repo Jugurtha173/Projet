@@ -7,7 +7,7 @@ package projet;
 public class Other extends Character{
 
 	public Other(String name) {
-		super(name);
+		super(name, Projet.ANSI_CYAN);
 		
 	}
 
