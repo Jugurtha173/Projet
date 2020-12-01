@@ -7,7 +7,7 @@ package projet;
 public class Knife extends Object{
 
 	public Knife() {
-		super("Knife");
+		super("Knife", -5);
 		
 	}
 	
@@ -18,8 +18,8 @@ public class Knife extends Object{
 	}
 
 	@Override
-	public void use() {
-		
+	public void use(Character c) {
+		c.beAttacked(this.getHealthEffect());
 	}
     
 }

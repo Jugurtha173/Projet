@@ -7,18 +7,19 @@ import java.util.Scanner;
  *
  * @author JUGURTHA
  */
-public class Hero extends Character{
+public class Hero extends Character implements Attackable{
 	
 	Scanner action = new Scanner(System.in);
+	Scanner choice = new Scanner(System.in);
 	private boolean win = false;
 	private boolean quit = false;
 
 	public Hero(String name) {
-		super(name);	
+		super(name);
 	}
 	
 	public void play() {
-		while (!this.win && !this.quit) {
+		while (!win && !quit && this.isAlive) {
 			String line = action.nextLine();
 			String[] argv = line.split(" ");
 			this.evalAction(argv);			
@@ -28,7 +29,11 @@ public class Hero extends Character{
 	public void evalAction(String[] argv) {
 		switch (argv[0].toLowerCase()) {
 		case "go": {
-			this.go(argv[1]);
+			try {		
+				this.go(argv[1]);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("Where do want to go ?");
+			}
 			break;
 		}
 		case "help": {
@@ -53,11 +58,19 @@ public class Hero extends Character{
 			break;
 		}
 		case "use": {
-			this.use();
+			try {
+				this.use(argv[1]);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("Use what ?");
+			}
 			break;
 		}
 		case "inventory": {
 			this.showInventory();
+			break;
+		}
+		case "attack": {
+			this.attack((Attackable) this.enemyInRoom());
 			break;
 		}
 		default:
@@ -76,13 +89,22 @@ public class Hero extends Character{
 		// on parcours les portes
 		for(Door door : ld) {
 			// pour chaque porte on recupére la Room d'à côté
-			Room r = door.room1 != this.getCurrentRoom() ? door.room1 : door.room2 ;
+			Room r = door.room[0] != this.getCurrentRoom() ? door.room[0] : door.room[1] ;
 			// si c'est bien la Room qu'on veut
 			if(r.getName().equalsIgnoreCase(room)) {
+				// on verifie si il y a un ennemie
+				if(door.guard != null && door.guard.isAlive) {
+					door.guard.attack((Attackable)this);
+					return;
+				}
 				// on ouvre sa porte
 				door.open();
-				// on entre dans la Room
-				this.changeRoom(r);
+				// on entre dans la Room si elle est ouverte
+				if(door.isState()) {
+					this.changeRoom(r);					
+				}
+				// on regarde ou on a attérit
+				this.look();
 				// c'est bon on sort de la methode
 				return;		
 			}
@@ -90,11 +112,13 @@ public class Hero extends Character{
 		}
 		// ici on a donc pas trouvé la Room
 		System.out.println("!!! Room not found !!!");
-
+		
 	}
 	
 	public void changeRoom(Room room) {
+		this.getCurrentRoom().removeCharacter(this);
 		this.setCurrentRoom(room);
+		room.addCharacter(this);
 		System.out.println("!!! Room changed !!!");
 	}
 
@@ -102,6 +126,7 @@ public class Hero extends Character{
 		Object obj = findObject(object);
 		if(obj != null) {
 			this.inventory.add(obj);
+			this.getCurrentRoom().getObjects().remove(obj);
 			System.out.println(object.toString() + " takken");
 		}
 	}
@@ -115,11 +140,16 @@ public class Hero extends Character{
 		Object obj = findObject(object);
 		if(obj != null) {
 			System.out.println(obj.descriptif());
+		} else {
+			System.out.println("!!! There's no " + object + " here !!!");
 		}
 	}
 	
-	public void use() {
-		System.out.println("on est dans use");
+	public void use(String object) {
+		Object obj = findObjectInventory(object);
+		if(obj != null) {
+			obj.use(this);
+		}
 	}
 	
 	public void help() {
@@ -144,7 +174,19 @@ public class Hero extends Character{
 				return obj;
 			}
 		}
-		System.out.println("!!! Object " + object + " not found !!!");
+		System.out.println("!!! No " + object + " found here !!!");
+		return null;
+	}
+	
+	public Object findObjectInventory(String object) {
+		// la liste d'objets de la Room actuelle
+		List<Object> lo = this.inventory;
+		for(Object obj : lo) {
+			if(obj.toString().equalsIgnoreCase(object)) {
+				return obj;
+			}
+		}
+		System.out.println("!!! No " + object + " in your inventory !!!");
 		return null;
 	}
 
@@ -157,18 +199,53 @@ public class Hero extends Character{
 			}
 		}
 	}
-	
-	public void showHP() {
-		int level = this.getHP();
-		System.out.print("HP : [");
-		for (int i = 0; i < 100; i++) {
-			if(i <= level) {
-				System.out.print("#");
-			} else {
-				System.out.print("-");
-			}
+
+	public Enemy enemyInRoom() {
+		List<Character> chars = this.getCurrentRoom().getCharacters();
+		for(Character c : chars) {
+			if(c instanceof Enemy) {
+				return (Enemy) c;
+			}	
 		}
-		System.out.println("] " + level + "%\n");
+		return null;
 	}
+	
+	@Override
+	public void beAttacked(int damage) {
+		this.editHP(damage);	
+		this.showHP();
+		// on verifie le hero est toujours vivant
+		this.die();
+	}
+
+	@Override
+	public void attack(Attackable target) {
+		// l'ennemie attack la cible avec son invetaire si ce dernier n'est pas vide
+		if(this.inventory.size() != 0) {
+			System.out.println("What do you want to use to attack");
+			this.showInventory();
+			
+			String s = choice.nextLine();
+			Object obj = findObjectInventory(s);
+			
+			// si l'objet existe bien dans l'inventaire
+			if(obj != null) {
+				target.beAttacked(obj.getHealthEffect());
+				//this.inventory.remove(obj);
+			// sinon coup-de-poing
+			} else {
+				System.out.println("let's punch him");
+				target.beAttacked(-1);
+			}
+			
+		} else {
+			// sinon on frappe la cible avec un coup-de-poing ( un coup-de-poing implique -1 point de vie)
+			target.beAttacked(-1);
+		}
+		
+		
+	}
+
+	
 	
 }

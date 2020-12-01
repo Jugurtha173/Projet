@@ -42,9 +42,11 @@ public class NuclearCenter {
 		System.out.println("\n\n===================================================================================================\n\n");
 		
 		Hero homer = new Hero("Homer");
+		homer.beAttacked(-2);
 		this.Rooms.get(0).addCharacter(homer);
 		((Hero) homer).play();
 		
+		input.close();
 
 	}
 	
@@ -95,13 +97,19 @@ public class NuclearCenter {
 		Door pr_bd = new Door(productionRoom, BurnsDesk);		
 		
 		// creation des personnages
-		Character tahiti_Bob = new Enemy("Tahiti Bob");
-		Character kang_kodos = new Enemy("Kang & Kodos");
-		Character nelson = new Enemy("Nelson");
-		Character smithers= new Enemy("Smithers");
-		Character burns= new Enemy("Mr Burns");
-		Character marge = new Other("Marge");
 		Character moe = new Other("Moe");
+		Character marge = new Other("Marge");
+		
+		// creation des ennemies
+		Enemy tahiti_Bob = new Enemy("Tahiti Bob");
+		tahiti_Bob.inventory.add(new Knife());
+		tahiti_Bob.inventory.add(new Knife());
+		tahiti_Bob.inventory.add(new Knife());
+
+		Enemy kang_kodos = new Enemy("Kang & Kodos");
+		Enemy nelson = new Enemy("Nelson");
+		Enemy smithers= new Enemy("Smithers");
+		Enemy burns= new Enemy("Mr Burns");
 		
 		// creation des objets
 		Object skate = new Skate();
@@ -119,7 +127,7 @@ public class NuclearCenter {
 		homerDesk.addObject(new Duff());
 		hall1.addObject(skate);
 		hall2.addObject(duff1);
-		controlRoom.addCharacter(tahiti_Bob);
+		controlRoom.addGurad(tahiti_Bob, cr_h3 );
 		hall3.addObject(duff2);
 		hall3.addObject(key);
 		automatedControlRoom.addCharacter(marge);

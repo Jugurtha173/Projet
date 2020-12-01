@@ -6,7 +6,7 @@ package projet;
  */
 public class Skate extends Object{
     public Skate() {
-    	super("Skate");
+    	super("Skate", -3);
     }
     
     @Override
@@ -16,7 +16,7 @@ public class Skate extends Object{
 	}
 
 	@Override
-	public void use() {
+	public void use(Character c) {
 		// TODO Auto-generated method stub
 		
 	}

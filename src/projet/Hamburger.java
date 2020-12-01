@@ -7,7 +7,7 @@ package projet;
 public class Hamburger extends Object{
 
 	public Hamburger() {
-		super("Hamburger");
+		super("Hamburger", +3);
 	}
 	
 	@Override
@@ -17,7 +17,7 @@ public class Hamburger extends Object{
 	}
 
 	@Override
-	public void use() {
+	public void use(Character c) {
 		
 	}
     

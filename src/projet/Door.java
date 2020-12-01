@@ -1,7 +1,5 @@
 package projet;
 
-import java.util.List;
-
 /**
  *
  * @author JUGURTHA
@@ -21,8 +19,10 @@ public class Door {
     //public static final String ANSI_WHITE = "\u001B[37m";
     */
     
-    public Room room1 = null;
-    public Room room2 = null;
+    public Room[] room = new Room[2];
+    public Enemy guard = null;
+    
+   
     
     private boolean state;
     
@@ -36,11 +36,11 @@ public class Door {
     
     public Door(Room room1, Room room2) {
     	this();
-    	this.room1 = room1;
-    	this.room2 = room2;
+    	this.room[0] = room1;
+    	this.room[1] = room2;
     	
-    	this.room1.addDoor(this);
-    	this.room2.addDoor(this);
+    	this.room[0].addDoor(this);
+    	this.room[1].addDoor(this);
     }
     
     public void open(){
@@ -54,15 +54,7 @@ public class Door {
     public boolean isState() {
         return state;
     }
-
-/*  public void setRoom(Room room) {
-//    	if (this.room1 != null) {
-//			this.room1 = room;
-//		} else {
-//			this.room2 = room;
-//		}
-//    }
-*/    
+ 
     
     @Override
     public String toString() {
@@ -72,10 +64,6 @@ public class Door {
         return "porte " + this.getClass().getSimpleName() + "[etat = " + color + this.isState() + ANSI_RESET + "]";
     }
 
-    public static void printDoorList(List<Door> doors){
-        for(Door door : doors)
-            System.out.println(door.toString());
-    }
     
     
 }

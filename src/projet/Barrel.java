@@ -13,7 +13,7 @@ public class Barrel extends Object {
 	}
 
 	@Override
-	public void use() {
+	public void use(Character c) {
 		
 	}
 

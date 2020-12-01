@@ -13,7 +13,7 @@ public class ClosedDoor extends Door{
     
     @Override
     public void open(){
-        System.err.println("Porte condamnée impossible d'ouvrir");
+        System.err.println("This door is closed, you can't open !");
     }
     
 }

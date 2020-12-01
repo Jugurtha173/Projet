@@ -5,6 +5,7 @@ package projet;
  * @author JUGURTHA
  */
 public class Duff extends Object{
+	
 	public Duff() {
 		super("Duff");
 	}
@@ -16,7 +17,8 @@ public class Duff extends Object{
 	}
 
 	@Override
-	public void use() {
+	public void use(Character c) {
+		System.out.println("using duff");
 		
 	}
 }

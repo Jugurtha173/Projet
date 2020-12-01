@@ -17,7 +17,7 @@ public class Donut extends Object{
 	}
 
 	@Override
-	public void use() {
+	public void use(Character c) {
 		
 	}
     
