@@ -68,7 +68,7 @@ public class NuclearCenter {
 		Room productionRoom = new Room("Production_Room");
 		Room BurnsDesk = new Room("Burns_Desk");
 		
-		// ajout des lieux à la NuclearCenter
+		// ajout des lieux a la NuclearCenter
 		this.Rooms.add(homerDesk);
 		this.Rooms.add(hall1);
 		this.Rooms.add(hall2);

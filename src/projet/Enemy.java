@@ -7,7 +7,7 @@ package projet;
 public class Enemy extends Character implements Attackable{
 
 	public Enemy(String name) {
-		super(name, Projet.ANSI_RED);
+		super(name);
 	}
 
 	@Override

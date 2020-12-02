@@ -72,12 +72,12 @@ public class Room {
 		
 		// lister les personnages
 		for (Character perso : characters) {
-			// sauf le hero (on sait déjà qu'il est là)
+			// sauf le hero (on sait deja qu'il est la)
 			if(!(perso instanceof Hero)) {
 				// si il est mort on affiche son cadavre
 				if(!(perso.isAlive)) detail += "OH ! The dead body of ";
 				
-				detail += perso.toString() + " is here, " ;
+				detail += perso.toString() + " is here\n" ;
 				
 			}
 			
@@ -87,7 +87,6 @@ public class Room {
 		for (Door door : doors) {
 			detail  += "there's a door to "
 					+ ( door.room[0] != this ? door.room[0].name : door.room[1].name  ) + "\n" ;
-			System.out.println(door.toString());
 		}
 		
 		return detail;

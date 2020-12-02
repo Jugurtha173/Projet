@@ -12,7 +12,6 @@ public abstract class Character {
 	protected Boolean isAlive = true;
 	private final String name;
 	private int HP;
-	private String color = Projet.ANSI_RESET;
 	private Room currentRoom;
 	
 	
@@ -23,12 +22,6 @@ public abstract class Character {
 		this.HP = MAX_HP;
 	}
 	
-	public Character(String name, String color) {
-		this(name);
-		this.color = color;
-		
-	}
-    
 	public int getHP() {
 		return this.HP;
 	}
@@ -58,7 +51,7 @@ public abstract class Character {
 	}
 	
 	public String getName() {
-		return this.color + this.name;
+		return this.name;
 	}
 	
 	public Room getCurrentRoom() {

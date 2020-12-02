@@ -105,7 +105,7 @@ public class Hero extends Character implements Attackable{
 		List<Door> ld = this.getCurrentRoom().getDoors();
 		// on parcours les portes
 		for(Door door : ld) {
-			// pour chaque porte on recupére la Room d'à côté
+			// pour chaque porte on recupere la Room d'a cote
 			Room r = door.room[0] != this.getCurrentRoom() ? door.room[0] : door.room[1] ;
 			// si c'est bien la Room qu'on veut
 			if(r.getName().equalsIgnoreCase(room)) {
@@ -120,14 +120,14 @@ public class Hero extends Character implements Attackable{
 				if(door.isState()) {
 					this.changeRoom(r);					
 				}
-				// on regarde ou on a attérit
+				// on regarde ou on a attï¿½rit
 				this.look();
 				// c'est bon on sort de la methode
 				return;		
 			}
 			
 		}
-		// ici on a donc pas trouvé la Room
+		// ici on a donc pas trouvï¿½ la Room
 		System.out.println("!!! Room not found !!!");
 		
 	}

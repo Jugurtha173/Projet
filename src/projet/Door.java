@@ -46,10 +46,7 @@ public class Door {
     
     @Override
     public String toString() {
-        String color = Projet.ANSI_RED;
-        if(this.isState())
-            color = Projet.ANSI_GREEN;
-        return "porte " + this.getClass().getSimpleName() + "[etat = " + color + this.isState() + Projet.ANSI_RESET + "]";
+        return "porte " + this.getClass().getSimpleName() + "[etat = " + this.isState() + "]";
     }
 
     
