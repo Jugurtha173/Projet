@@ -62,9 +62,6 @@ public abstract class Character {
 		this.currentRoom = currentRoom;
 	}
 
-	public void beAttacked(int damage) {
-		this.HP -= damage;
-	}
 	
 	@Override
 	public String toString() {	

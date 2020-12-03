@@ -8,8 +8,8 @@ public class Flashlight extends Object {
 
 	@Override
 	public String descriptif() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "Flashlight, you can light up rooms with it";
 	}
 
 	@Override

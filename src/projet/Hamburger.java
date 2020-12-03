@@ -18,7 +18,7 @@ public class Hamburger extends Object{
 
 	@Override
 	public void use(Character c) {
-		
+		c.editHP(this.getHealthEffect());
 	}
     
 }

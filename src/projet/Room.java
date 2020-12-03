@@ -25,7 +25,7 @@ public class Room {
 	}
 	
  	public void lightUp() {
-		this.isLigth = !isLigth;
+		this.isLigth = true;
 	}
 	
 	public void addCharacter(Character character) {

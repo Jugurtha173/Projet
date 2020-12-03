@@ -17,8 +17,12 @@ package projet;
 		this(name);
 		this.healthEffect = healthEffect;
 	}
+	
+	public int getHealthEffect() {
+		return healthEffect;
+	}
 
-	    @Override
+	@Override
     public String toString() {
     	return this.name;
     }
@@ -26,10 +30,5 @@ package projet;
 	public abstract String descriptif();
 	    
     public abstract void use(Character c);
-
-	public int getHealthEffect() {
-		return healthEffect;
-	}
-
 
 }

@@ -15,8 +15,7 @@ public class Treasure extends Object {
 
 	@Override
 	public void use(Character c) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(this.descriptif());
 	}
 
 }

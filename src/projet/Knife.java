@@ -19,7 +19,7 @@ public class Knife extends Object{
 
 	@Override
 	public void use(Character c) {
-		c.beAttacked(this.getHealthEffect());
+		((Hero)c).attack(((Hero)c).enemyInRoom());
 	}
     
 }

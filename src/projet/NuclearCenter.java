@@ -132,7 +132,6 @@ public class NuclearCenter {
 		// creation des objets
 		Object skate = new Skate();
 		Object knife = new Knife();
-		Object tablet = new Tablet();
 		Object hamburger = new Hamburger();
 		Object key = new Key();
 		Object duff1 = new Duff();

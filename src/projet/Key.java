@@ -14,7 +14,7 @@ public class Key extends Object {
 
 	@Override
 	public void use(Character c) {
-		
+		System.out.println(this.descriptif());	
 	}
 
 }

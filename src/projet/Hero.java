@@ -59,9 +59,13 @@ public class Hero extends Character implements Attackable{
 		}
 		case "use": {
 			try {
-				this.use(argv[1]);
-			} catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println("Use what ?");
+				use(argv[1], argv[2]);
+			} catch (IndexOutOfBoundsException e2) {
+				try {
+					this.use(argv[1]);
+				} catch (ArrayIndexOutOfBoundsException e1) {
+					System.out.println("Use what ?");
+				}
 			}
 			break;
 		}
@@ -181,6 +185,14 @@ public class Hero extends Character implements Attackable{
 		if(obj != null) {
 			obj.use(this);
 		}
+	}
+	
+	public void use(String obj1, String obj2) {
+		Object object1 = findObject(obj1);
+		Object object2 = findObjectInventory(obj2);
+		
+		((Barrel) object1).use(this, object2);
+		
 	}
 	
 	public void help() {
