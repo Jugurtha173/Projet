@@ -10,12 +10,22 @@ import java.util.List;
 public class Room {
 	
 	private String name;
+	public Boolean isLigth = true;
 	private List<Door> doors = new ArrayList<>();
 	private List<Object> objects = new ArrayList<>();
 	private List<Character> characters = new ArrayList<>();
 	
 	public Room(String name) {
+		this(name, true);
+	}
+	
+	public Room(String name, Boolean light) {
 		this.name = name;
+		this.isLigth = light;
+	}
+	
+ 	public void lightUp() {
+		this.isLigth = !isLigth;
 	}
 	
 	public void addCharacter(Character character) {
@@ -27,7 +37,7 @@ public class Room {
 		this.characters.remove(character);
 	}
 	
-	public void addGurad(Enemy guard, Door door) {
+	public void addEnemy(Enemy guard, Door door) {
 		this.addCharacter(guard);
 		door.guard = guard;
 	}

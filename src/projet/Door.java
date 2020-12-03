@@ -10,8 +10,6 @@ public class Door {
     public Room[] room = new Room[2];
     public Enemy guard = null;
     
-   
-    
     private boolean state;
     
     public Door(){
@@ -43,7 +41,6 @@ public class Door {
         return state;
     }
  
-    
     @Override
     public String toString() {
         return "porte " + this.getClass().getSimpleName() + "[etat = " + this.isState() + "]";

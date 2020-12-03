@@ -72,7 +72,7 @@ public class Hero extends Character implements Attackable{
 		case "attack": {
 			// si il n'y a pas d'ennemie ou que l'ennemie est mort
 			Enemy target = this.enemyInRoom();
-			if(target != null || !target.isAlive) {
+			if(target != null && !(target.isAlive)) {
 				System.out.println("No ennemy alive here ! you can go ");
 				break;
 			}
@@ -80,11 +80,11 @@ public class Hero extends Character implements Attackable{
 			// sinon, on l'attaque avec l'objet en argument
 			try {
 				Object obj= this.findObjectInventory(argv[1]);
-			    this.attack((Attackable) this.enemyInRoom(), obj);
+			    this.attack((Attackable) target, obj);
 			    
 			} catch (ArrayIndexOutOfBoundsException e) {
 				
-				this.attack((Attackable) this.enemyInRoom());
+				this.attack((Attackable) target);
 			}
 			break;
 		}
@@ -108,7 +108,7 @@ public class Hero extends Character implements Attackable{
 			// pour chaque porte on recupere la Room d'a cote
 			Room r = door.room[0] != this.getCurrentRoom() ? door.room[0] : door.room[1] ;
 			// si c'est bien la Room qu'on veut
-			if(r.getName().equalsIgnoreCase(room)) {
+			if(r.getName().split(" ")[0].equalsIgnoreCase(room)) {
 				// on verifie si il y a un ennemie
 				if(door.guard != null && door.guard.isAlive) {
 					door.guard.attack((Attackable)this);
@@ -140,25 +140,39 @@ public class Hero extends Character implements Attackable{
 	}
 
 	public void take(String object) {
-		Object obj = findObject(object);
-		if(obj != null) {
-			this.inventory.add(obj);
-			this.getCurrentRoom().getObjects().remove(obj);
-			System.out.println(object.toString() + " takken");
+		if(this.isCurrentLight()) {
+			Object obj = findObject(object);
+			if(obj != null) {
+				this.inventory.add(obj);
+				this.getCurrentRoom().getObjects().remove(obj);
+				System.out.println(object.toString() + " takken");
+			}
 		}
 	}
-		
-	public void look() {
-		this.showHP();
-		System.out.println(this.getCurrentRoom().descriptif());
+	
+	private boolean isCurrentLight() {
+		if(this.getCurrentRoom().isLigth) {
+			return true;
+		} else {
+			System.out.println("Hmmmm !!! Can't see anything, this room is not enlightened");
+			return false;
+		}
 	}
 	
+	public void look() {
+		this.showHP();
+		if(this.isCurrentLight())
+			System.out.println(this.getCurrentRoom().descriptif());			
+		
+	}
+
 	public void look(String object) {
-		Object obj = findObject(object);
-		if(obj != null) {
-			System.out.println(obj.descriptif());
-		} else {
-			System.out.println("!!! There's no " + object + " here !!!");
+		if(this.isCurrentLight()) {
+			Object obj = findObject(object);
+			if(obj != null) 
+				System.out.println(obj.descriptif());
+			else
+				System.out.println("!!! There's no " + object + " here !!!");	
 		}
 	}
 	
@@ -247,6 +261,9 @@ public class Hero extends Character implements Attackable{
 			
 			this.attack(target, obj);
 		
+		} else {
+			
+			this.attack(target, null);
 		}
 	}
 
@@ -262,6 +279,5 @@ public class Hero extends Character implements Attackable{
 		
 	}
 
-	
 	
 }

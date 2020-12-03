@@ -42,9 +42,12 @@ public class NuclearCenter {
 		System.out.println("\n\n===================================================================================================\n\n");
 		
 		Hero homer = new Hero("Homer");
-		homer.beAttacked(-2);
+		// Homer a faim donc il est pas en pleinne forme
+		homer.beAttacked(-3);
+		// Homer est dans la premiere salle (son bureau)
 		this.Rooms.get(0).addCharacter(homer);
-		((Hero) homer).play();
+		// LET'S GO
+		homer.play();
 		
 		input.close();
 
@@ -55,50 +58,65 @@ public class NuclearCenter {
 		// initialisation
 
 		// creation des lieux
-		Room homerDesk = new Room("Homer_Desk");
-		Room hall1 = new Room("Hall_1");
-		Room hall2 = new Room("Hall_2");
-		Room hall3 = new Room("Hall_3");
-		Room hall4 = new Room("Hall_4");
-		Room hall5 = new Room("Hall_5");
-		Room controlRoom = new Room("Control_Room");
-		Room automatedControlRoom = new Room("Automated_Control_Room");
-		Room engineRoom = new Room("Engine_Room");
-		Room cafeteria = new Room("Cafeteria");
-		Room productionRoom = new Room("Production_Room");
-		Room BurnsDesk = new Room("Burns_Desk");
+		Room homerDesk = new Room("My Desk");
+		Room hall = new Room("Hall");
+		Room rest = new Room("Rest Room");
+		Room b24 = new Room("B24");
+		Room control = new Room("Control Room");
+		Room kitchen = new Room("Kitchen");
+		Room storage = new Room("Storage Room", false);
+		Room moes = new Room("MOE'S Bar");
+		Room engine = new Room("Engine Room");
+		Room auditorium = new Room("Auditorium");
+		Room employee = new Room("Employee Break Room");
+		Room operations = new Room("Operations Center");
+		Room production = new Room("Production Room");
+		Room burnsDesk = new Room("Burns Office");		
 		
 		// ajout des lieux a la NuclearCenter
 		this.Rooms.add(homerDesk);
-		this.Rooms.add(hall1);
-		this.Rooms.add(hall2);
-		this.Rooms.add(hall3);
-		this.Rooms.add(hall4);
-		this.Rooms.add(hall5);
-		this.Rooms.add(controlRoom);
-		this.Rooms.add(automatedControlRoom);
-		this.Rooms.add(engineRoom);
-		this.Rooms.add(cafeteria);
-		this.Rooms.add(productionRoom);
-		this.Rooms.add(BurnsDesk);
+		this.Rooms.add(hall);
+		this.Rooms.add(rest);
+		this.Rooms.add(b24);
+		this.Rooms.add(control);
+		this.Rooms.add(kitchen);
+		this.Rooms.add(storage);
+		this.Rooms.add(moes);
+		this.Rooms.add(engine);
+		this.Rooms.add(auditorium);
+		this.Rooms.add(employee);
+		this.Rooms.add(operations);
+		this.Rooms.add(production);
+		this.Rooms.add(burnsDesk);
 
-		
 		// creation des portes
-		Door hd_h1 = new Door(homerDesk, hall1);
-		Door h1_h2 = new Door(hall1, hall2);
-		Door h2_cr = new Door(hall2, controlRoom);
-		Door cr_h3 = new Door(controlRoom, hall3);
-		Door h3_acr = new Door(hall3, automatedControlRoom);
-		Door acr_h4 = new Door(automatedControlRoom, hall4);
-		Door h4_er = new Door(hall4, engineRoom);
-		Door c_h5 = new Door(cafeteria, hall5);
-		Door er_c = new Door(engineRoom, cafeteria);
-		Door h5_pr = new Door(hall5, productionRoom);
-		Door pr_bd = new Door(productionRoom, BurnsDesk);		
+		Door hd_h = new Door(homerDesk, hall);
+		Door h_r = new Door(hall, rest);
+		Door h_b = new Door(hall, b24);
+		Door h_c = new Door(hall, control);
+		Door r_k = new Door(rest, kitchen);
+		Door b_c = new Door(b24, control);
+		Door b_k = new Door(b24, kitchen);
+		Door b_s = new Door(b24, storage);
+		Door c_m = new Door(control, moes);
+		Door k_e = new Door(kitchen, engine);
+		Door k_i = new Door(kitchen, auditorium);
+		Door k_s = new Door(kitchen, storage);
+		Door s_m = new Door(storage, moes);
+		Door m_o = new Door(moes, operations);
+		Door e_a = new Door(engine, auditorium);
+		Door a_p = new Door(auditorium, production);
+		Door a_e = new Door(auditorium, employee);
+		Door e_o = new Door(employee, operations);
+		Door p_b = new Door(production, burnsDesk);
+			
 		
 		// creation des personnages
 		Character moe = new Other("Moe");
 		Character marge = new Other("Marge");
+		Character wiggum = new Other("Wiggum");
+		Character krusty = new Other("Krusty");
+		Character lisa = new Other("Lisa");
 		
 		// creation des ennemies
 		Enemy tahiti_Bob = new Enemy("Tahiti Bob");
@@ -116,28 +134,36 @@ public class NuclearCenter {
 		Object knife = new Knife();
 		Object tablet = new Tablet();
 		Object hamburger = new Hamburger();
-		Object donut = new Donut();
 		Object key = new Key();
 		Object duff1 = new Duff();
 		Object duff2 = new Duff();
 		Object duff3 = new Duff();
 		Object barrel= new Barrel();
+		Object flashlight = new Flashlight();
+		Object parchment = new Parchment();
+		Object treasure = new Treasure();
 		
 		// MAJ des Rooms
 		homerDesk.addObject(new Duff());
-		hall1.addObject(skate);
-		hall2.addObject(duff1);
-		controlRoom.addGurad(tahiti_Bob, cr_h3 );
-		hall3.addObject(duff2);
-		hall3.addObject(key);
-		automatedControlRoom.addCharacter(marge);
-		hall4.addObject(barrel);
-		engineRoom.addCharacter(kang_kodos);
-		cafeteria.addCharacter(moe);
-		hall5.addCharacter(nelson);
-		productionRoom.addObject(duff3);
-		productionRoom.addCharacter(smithers);
-		BurnsDesk.addCharacter(burns);
-		BurnsDesk.addObject(donut);;
+		hall.addObject(skate);
+		hall.addObject(duff1);
+		control.addObject(key);
+		control.addObject(flashlight);
+		control.addCharacter(wiggum);
+		b24.addEnemy(tahiti_Bob, b_k);
+		rest.addCharacter(marge);
+		moes.addCharacter(moe);
+		moes.addObject(barrel);
+		storage.addObject(parchment);
+		kitchen.addCharacter(krusty);
+		operations.addEnemy(kang_kodos, m_o);
+		employee.addEnemy(nelson, e_o);
+		auditorium.addCharacter(lisa);
+		engine.addObject(duff2);
+		production.addEnemy(smithers, p_b);
+		production.addObject(duff3);
+		burnsDesk.addCharacter(burns);
+		burnsDesk.addObject(treasure);
+
 	}
 }
