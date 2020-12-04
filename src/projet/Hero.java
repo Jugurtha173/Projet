@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * @author JUGURTHA
  */
-public class Hero extends Character implements Attackable{
+public class Hero extends Character implements Attackable, Talkable{
 	
 	Scanner action = new Scanner(System.in);
 	Scanner choice = new Scanner(System.in);
@@ -122,16 +122,17 @@ public class Hero extends Character implements Attackable{
 				door.open();
 				// on entre dans la Room si elle est ouverte
 				if(door.isState()) {
-					this.changeRoom(r);					
+					this.changeRoom(r);
+					door.close();
 				}
-				// on regarde ou on a attï¿½rit
+				// on regarde ou on a attérit
 				this.look();
 				// c'est bon on sort de la methode
 				return;		
 			}
 			
 		}
-		// ici on a donc pas trouvï¿½ la Room
+		// ici on a donc pas trouvé la Room
 		System.out.println("!!! Room not found !!!");
 		
 	}
@@ -288,6 +289,12 @@ public class Hero extends Character implements Attackable{
 			target.beAttacked(object.getHealthEffect());
 			//this.inventory.remove(object);
 		}
+		
+	}
+
+	@Override
+	public void talkTo(Talkable t) {
+		// TODO Auto-generated method stub
 		
 	}
 

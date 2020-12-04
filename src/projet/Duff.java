@@ -24,8 +24,9 @@ public class Duff extends Object{
 	@Override
 	public String descriptif() {
 		
-		return this.toString( )+ (this.full ? "[Full]" : "[Empty]");
+		return "Duff" + (this.full ? " [Full]" : " [Empty]") ;
 	}
+
 	
 	public Duff getNextFullDuff(Character c) {
 		for(Object obj : c.inventory)

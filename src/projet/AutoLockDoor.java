@@ -6,17 +6,21 @@ package projet;
  */
 public class AutoLockDoor extends Door {
     
-    private boolean lock;
+    private boolean lock = true;
     
     public AutoLockDoor(){
        super(false);
-       this.lock = true;
+    }
+    
+    public AutoLockDoor(Room room1, Room room2) {
+    	super(room1, room2);
     }
     
     @Override
     public void open(){
-        if( !(this.lock) )
-            super.open();
+        if( !(this.lock) ) {
+        	super.open();
+        }
     }
     
     @Override
