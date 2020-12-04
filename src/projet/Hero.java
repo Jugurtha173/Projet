@@ -32,7 +32,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			try {		
 				this.go(argv[1]);
 			} catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println("Where do want to go ?");
+				Projet.print("Where do want to go ?");
 			}
 			break;
 		}
@@ -64,9 +64,13 @@ public class Hero extends Character implements Attackable, Talkable{
 				try {
 					this.use(argv[1]);
 				} catch (ArrayIndexOutOfBoundsException e1) {
-					System.out.println("Use what ?");
+					Projet.print("Use what ?");
 				}
 			}
+			break;
+		}
+		case "talk": {
+			this.talk();
 			break;
 		}
 		case "inventory": {
@@ -77,7 +81,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			// si il n'y a pas d'ennemie ou que l'ennemie est mort
 			Enemy target = this.enemyInRoom();
 			if(target != null && !(target.isAlive)) {
-				System.out.println("No ennemy alive here ! you can go ");
+				Projet.print("No ennemy alive here ! you can go ");
 				break;
 			}
 				
@@ -95,7 +99,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		
 		
 		default:
-			System.out.println("!!! Action incorrect !!!");
+			Projet.print("!!! Action incorrect !!!");
 		}
 	}
 
@@ -133,7 +137,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			
 		}
 		// ici on a donc pas trouvé la Room
-		System.out.println("!!! Room not found !!!");
+		Projet.print("!!! Room not found !!!");
 		
 	}
 	
@@ -141,7 +145,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		this.getCurrentRoom().removeCharacter(this);
 		this.setCurrentRoom(room);
 		room.addCharacter(this);
-		System.out.println("!!! Room changed !!!");
+		Projet.print("!!! Room changed !!!");
 	}
 
 	public void take(String object) {
@@ -150,7 +154,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			if(obj != null) {
 				this.inventory.add(obj);
 				this.getCurrentRoom().getObjects().remove(obj);
-				System.out.println(object.toString() + " takken");
+				Projet.print(object.toString() + " takken");
 			}
 		}
 	}
@@ -159,7 +163,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		if(this.getCurrentRoom().isLigth) {
 			return true;
 		} else {
-			System.out.println("Hmmmm !!! Can't see anything, this room is not enlightened");
+			Projet.print("Hmmmm !!! Can't see anything, this room is not enlightened");
 			return false;
 		}
 	}
@@ -167,7 +171,7 @@ public class Hero extends Character implements Attackable, Talkable{
 	public void look() {
 		this.showHP();
 		if(this.isCurrentLight())
-			System.out.println(this.getCurrentRoom().descriptif());			
+			Projet.print(this.getCurrentRoom().descriptif());			
 		
 	}
 
@@ -175,9 +179,9 @@ public class Hero extends Character implements Attackable, Talkable{
 		if(this.isCurrentLight()) {
 			Object obj = findObject(object);
 			if(obj != null) 
-				System.out.println(obj.descriptif());
+				Projet.print(obj.descriptif());
 			else
-				System.out.println("!!! There's no " + object + " here !!!");	
+				Projet.print("!!! There's no " + object + " here !!!");	
 		}
 	}
 	
@@ -197,17 +201,17 @@ public class Hero extends Character implements Attackable, Talkable{
 	}
 	
 	public void help() {
-		System.out.println("on est dans help");
+		Projet.print("on est dans help");
 	}
 	
 	public void quit() {
-		System.out.println("Really ? I'm always hungry, you want to RAGE QUIT ? ( enter q to quit)");
+		Projet.print("Really ? I'm always hungry, you want to RAGE QUIT ? ( enter q to quit)");
 		if(this.action.nextLine().equalsIgnoreCase("q")) {
 			this.quit  = true;
-			System.out.println("Okay! See you ");
+			Projet.print("Okay! See you ");
 			return;
 		}
-		System.out.println("Thank you ! We go back");
+		Projet.print("Thank you ! We go back");
 	}
 	 	
 	public Object findObject(String object) {
@@ -218,7 +222,7 @@ public class Hero extends Character implements Attackable, Talkable{
 				return obj;
 			}
 		}
-		System.out.println("!!! No " + object + " found here !!!");
+		Projet.print("!!! No " + object + " found here !!!");
 		return null;
 	}
 	
@@ -230,16 +234,16 @@ public class Hero extends Character implements Attackable, Talkable{
 				return obj;
 			}
 		}
-		System.out.println("!!! No " + object + " in your inventory !!!");
+		Projet.print("!!! No " + object + " in your inventory !!!");
 		return null;
 	}
 
 	public void showInventory() {
 		if(this.inventory.size() < 0) {
-			System.out.println("!!! Inventory is empty !!!");
+			Projet.print("!!! Inventory is empty !!!");
 		} else {
 			for(Object obj : this.inventory ) {
-				System.out.println(obj.toString());
+				Projet.print(obj.toString());
 			}
 		}
 	}
@@ -266,7 +270,7 @@ public class Hero extends Character implements Attackable, Talkable{
 	public void attack(Attackable target) {
 		// l'ennemie attack la cible avec son invetaire si ce dernier n'est pas vide
 		if(this.inventory.size() != 0) {
-			System.out.println("What do you want to use to attack");
+			Projet.print("What do you want to use to attack");
 			this.showInventory();
 			
 			String s = choice.next();
@@ -283,18 +287,28 @@ public class Hero extends Character implements Attackable, Talkable{
 	@Override
 	public void attack(Attackable target, Object object) {
 		if (object == null) {
-			System.out.println("let's punch him");
+			Projet.print("let's punch him");
 			target.beAttacked(-1);
 		} else {
 			target.beAttacked(object.getHealthEffect());
-			//this.inventory.remove(object);
+			//this.drop(object);
 		}
 		
+	}
+	
+	public void talk() {
+		Talkable target = (Talkable)this.getCurrentRoom().getCharacters().get(0);
+		if(target != null && target instanceof Other) {
+			System.err.println(target.toString());
+			this.talkTo(target);
+		}
+		else
+			System.err.println("There's no one to talk with here");
 	}
 
 	@Override
 	public void talkTo(Talkable t) {
-		// TODO Auto-generated method stub
+		t.talkTo((Talkable)this);
 		
 	}
 

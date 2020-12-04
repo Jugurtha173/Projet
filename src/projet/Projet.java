@@ -16,4 +16,13 @@ public class Projet {
         
     }
     
+    public static void print(String s) {
+    	for(int i = 0; i < s.length(); i++) {
+    		System.out.print(s.charAt(i));
+    		try { Thread.sleep(5);}
+    		catch (InterruptedException e) {}
+    	}
+    	System.out.println();
+    }
+    
 }

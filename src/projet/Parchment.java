@@ -14,15 +14,35 @@ public class Parchment extends Object {
 	@Override
 	public String descriptif() {
 		if(this.crypt) {
-			return "crypt";
+			return this.getCryptedMessage();
 		} else {
-			return "decrypted";
+			return this.getdecryptedMessage();
 		}
 	}
 
 	@Override
 	public void use(Character c) {
 		System.out.println(this.descriptif());
+	}
+	
+	public String getCryptedMessage() {
+		return "AZUL a si Burns,\n"
+				+ "Mayella thellidh di l'Aditorium, thebghidh ada3didh ar ghouri di l'birru inu,\n"
+				+ "attan l'code n tebburth id yi tawwin ar Production :\n"
+				+ "'sin sin yiwen sifar'.\n"
+				+ "3addid melmi ik yahwa, ayidafedh dakhel.\n"
+				+ "Sahit.\n"
+				+ "Smiters\n";
+	}
+	
+	public String getdecryptedMessage() {
+		return "Hello Mr Burns,\n"
+				+ "If you are in the Aditorium, and you wan to came in my office,"
+				+ "this is the code of door to Production :\n"
+				+ "'two two one zero'.\n"
+				+ "You can came whenever you want, you will find me inside.\n"
+				+ "Thank you.\n"
+				+ "Smiters\n";
 	}
 	
 	

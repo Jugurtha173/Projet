@@ -17,7 +17,7 @@ public class NuclearCenter {
 		
 		Scanner input = new Scanner(System.in);
 		
-		System.out.println(""
+		Projet.print(""
 				+ "Welcome to Homer's Adventure\n"
 				+ "A game created by:\n"
 				+ "Hylia BOUDAHBA\n"
@@ -28,7 +28,7 @@ public class NuclearCenter {
 		
 		input.next();
 		
-		System.out.println(""
+		Projet.print(""
 				+ "Homer is in his office entrin to ... 'Work' \n"
 				+ "Suddenly ... he's hungry!\n"
 				+ "But Mr Burns confiscated his DONUT\n"
@@ -71,7 +71,8 @@ public class NuclearCenter {
 		Room employee = new Room("Employee Break Room");
 		Room operations = new Room("Operations Center");
 		Room production = new Room("Production Room");
-		Room burnsDesk = new Room("Burns Office");		
+		Room burnsDesk = new Room("Burns Office");	
+		Room safety = new Room("Safety deposit box");	
 		
 		// ajout des lieux a la NuclearCenter
 		this.Rooms.add(homerDesk);
@@ -88,6 +89,7 @@ public class NuclearCenter {
 		this.Rooms.add(operations);
 		this.Rooms.add(production);
 		this.Rooms.add(burnsDesk);
+		this.Rooms.add(safety);
 
 		// creation des portes
 		Door hd_h = new Door(homerDesk, hall);
@@ -105,10 +107,11 @@ public class NuclearCenter {
 		Door s_m = new Door(storage, moes);
 		Door m_o = new Door(moes, operations);
 		Door e_a = new Door(engine, auditorium);
-		SecretCodeDoor a_p = new SecretCodeDoor(auditorium, production, 4568);
+		SecretCodeDoor a_p = new SecretCodeDoor(auditorium, production, 2210);
 		Door a_e = new Door(auditorium, employee);
 		Door e_o = new Door(employee, operations);
 		Door p_b = new Door(production, burnsDesk);
+		SecretCodeDoor b_safety = new SecretCodeDoor(burnsDesk, safety);
 			
 		
 		// creation des personnages
@@ -116,7 +119,10 @@ public class NuclearCenter {
 		Character marge = new Other("Marge");
 		Character wiggum = new Other("Wiggum");
 		Character krusty = new Other("Krusty");
-		Character lisa = new Other("Lisa");
+		Other lisa = new Other("Lisa");
+		lisa.addSpeechs(Talkable.speechOfLisa1, Talkable.speechOfLisa2, Talkable.speechOfLisa3);
+		Other burns= new Other("Mr Burns");
+		burns.addSpeechs(Talkable.speechOfBurns1, Talkable.speechOfBurns2, Talkable.speechOfBurns3);
 		
 		// creation des ennemies
 		Enemy tahiti_Bob = new Enemy("Tahiti Bob");
@@ -127,7 +133,6 @@ public class NuclearCenter {
 		Enemy kang_kodos = new Enemy("Kang & Kodos");
 		Enemy nelson = new Enemy("Nelson");
 		Enemy smithers= new Enemy("Smithers");
-		Enemy burns= new Enemy("Mr Burns");
 		
 		// creation des objets
 		Object skate = new Skate();
@@ -163,6 +168,6 @@ public class NuclearCenter {
 		production.addObject(duff3);
 		burnsDesk.addCharacter(burns);
 		burnsDesk.addObject(treasure);
-
+		
 	}
 }

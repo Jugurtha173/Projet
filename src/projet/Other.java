@@ -1,19 +1,100 @@
 package projet;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  *
  * @author JUGURTHA
  */
-public class Other extends Character{
+public class Other extends Character implements Talkable{
 
+	public final List<String> speechs = new ArrayList<>();
+	private String condition;
+	Scanner interact = new Scanner(System.in);
+	
+	public Other(String name, String condition) {
+		super(name);
+		this.condition = condition;
+		
+	}
+	
 	public Other(String name) {
 		super(name);
 		
+	}
+	
+	public void addSpeechs(String speech1, String speech2, String speech3) {
+		this.speechs.add(speech1);
+		this.speechs.add(speech2);
+		this.speechs.add(speech3);
 	}
 
 	@Override
 	public void specialPower() {
 		
+	}
+
+	@Override
+	public void talkTo(Talkable t) {
+		Projet.print(this.speechs.get(0));
+		if (this.getName().equalsIgnoreCase("Lisa")) 
+			this.talkToLisa(t);
+		else
+		if(this.getName().equalsIgnoreCase("Mr Burns"))
+			this.talkToBurns(t);
+		
+		else {
+			if (condition.equalsIgnoreCase(interact.nextLine().split(" ")[0])) {
+				Projet.print(this.speechs.get(1));
+			} else {
+				Projet.print(this.speechs.get(2));
+			}
+		}		
+	}
+	
+	public void talkToLisa(Talkable t) {
+		List<Object> inv = ((Character)t).inventory;
+		for(Object obj : inv) {
+			if(obj instanceof Parchment) {
+				((Parchment)obj).decrypt();
+				Projet.print(this.speechs.get(1));
+				Projet.print(obj.descriptif());	
+				return;
+			}
+		}
+		Projet.print(this.speechs.get(2));
+
+	}
+	
+	public void talkToBurns(Talkable t) {
+		int note = this.interact.nextInt();
+		if(note < 7) {
+			System.out.println("-Burns : REALLY ? (-_-)\n"
+					+ "-Samuel : OK OK je rigole je comptai pas leur mettre une salle note de toutes facons\n"
+					+ "        : je vais revoir ma note a la hausse, aller\n");
+			talkTo(t);
+		} else {
+			if(note > 7 && note < 15) {
+				System.out.println("-Burns : OHHHHH honestly, don't they deserve more ?\n"
+								 + "        I will give you only one digit : '1***'"
+								 + "-Samuel : Mmmmmmm, c'est vrai qu'ils meritent plus...");
+				talkTo(t);
+			} else {
+				if(note > 15 && note < 18) {
+					System.out.println("-Burns : frankly, it touches me thank you\n"
+									 + "+ \"        I will give you three digit : '170*'\""
+									 + "-Samuel : Okayyy, ils abusent un peu je trouve\n"
+									 + "        Mais c'est vrai que c'est bien foutu, aller je leurs met un 20/20");
+					talkTo(t);
+				} else {
+					System.out.println("-Burns : WAAAAAW, you're the best Samuel ;) \n"
+							 		 + "        Take the code : '1703'\n"
+							 		 + "-Samuel : Tres bien, finissons-en (c'etait cool GG)");
+				}
+			}
+		}
 	}
     
 }
