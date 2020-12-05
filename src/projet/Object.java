@@ -1,9 +1,5 @@
 package projet;
 
-/**
- *
- * @author JUGURTHA
- */
 	public abstract class Object {
 	
 	private String name;

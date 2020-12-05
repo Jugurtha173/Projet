@@ -352,9 +352,9 @@ public class Hero extends Character implements Attackable, Talkable{
 	}
 	
 	public void talk() {
-		Talkable target = (Talkable)this.getCurrentRoom().getCharacters().get(0);
+		Character target = this.getCurrentRoom().getCharacters().get(0);
 		if(target != null && target instanceof Other) {
-			this.talkTo(target);
+			this.talkTo((Talkable)target);
 		}
 		else
 			System.err.println("There's no one to talk with here");

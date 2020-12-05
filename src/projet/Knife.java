@@ -1,9 +1,6 @@
 package projet;
 
-/**
- *
- * @author JUGURTHA
- */
+
 public class Knife extends Object{
 
 	public Knife() {

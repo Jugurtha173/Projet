@@ -4,10 +4,10 @@ package projet;
  *
  * @author JUGURTHA
  */
-public class Hamburger extends Object{
+public class Burger extends Object{
 
-	public Hamburger() {
-		super("Hamburger", +3);
+	public Burger() {
+		super("Burger", +3);
 	}
 	
 	@Override

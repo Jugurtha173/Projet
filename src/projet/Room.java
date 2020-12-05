@@ -3,10 +3,7 @@ package projet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author JUGURTHA
- */
+
 public class Room {
 	
 	private String name;

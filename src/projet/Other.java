@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author JUGURTHA
- */
+
 public class Other extends Character implements Talkable{
 
 	public final List<String> speechs = new ArrayList<>();
@@ -69,7 +66,7 @@ public class Other extends Character implements Talkable{
 		int note = this.interact.nextInt();
 		if(note < 7) {
 			System.out.println("-Burns : REALLY ? (-_-)\n"
-					+ "-Samuel : OK OK je rigole je comptai pas leur mettre une salle note de toutes facons\n"
+					+ "-Samuel : OK OK je rigole je comptais pas leur mettre une salle note de toutes facons\n"
 					+ "        : je vais revoir ma note a la hausse, aller\n");
 			talkToBurns(t);
 		} else {

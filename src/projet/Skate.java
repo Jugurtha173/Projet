@@ -1,9 +1,6 @@
 package projet;
 
-/**
- *
- * @author JUGURTHA
- */
+
 public class Skate extends Object{
     public Skate() {
     	super("Skate", -3);
