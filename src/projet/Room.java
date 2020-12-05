@@ -26,6 +26,7 @@ public class Room {
 	
  	public void lightUp() {
 		this.isLigth = true;
+		System.out.println("Room is now enlightened!");
 	}
 	
 	public void addCharacter(Character character) {

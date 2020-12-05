@@ -13,7 +13,7 @@ public class Hamburger extends Object{
 	@Override
 	public String descriptif() {
 		
-		return this.toString();
+		return this.toString()+" use to gain energy!";
 	}
 
 	@Override

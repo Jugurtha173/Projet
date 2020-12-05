@@ -53,6 +53,10 @@ public class Hero extends Character implements Attackable, Talkable{
 			this.take(argv[1]);
 			break;
 		}
+		case "drop":{
+			this.drop(argv[1]);
+			break;
+		}
 		case "quit": {
 			this.quit();
 			break;
@@ -101,11 +105,6 @@ public class Hero extends Character implements Attackable, Talkable{
 		default:
 			Projet.print("!!! Action incorrect !!!");
 		}
-	}
-
-	@Override
-	public void specialPower() {
-		
 	}
 	
 	public void go(String room) {
@@ -156,7 +155,25 @@ public class Hero extends Character implements Attackable, Talkable{
 				this.getCurrentRoom().getObjects().remove(obj);
 				Projet.print(object.toString() + " takken");
 			}
+			if(obj instanceof Donuts) {
+				this.win = true;
+				this.win();
+			}
 		}
+	}
+	
+	public void drop(String object) {
+		Object obj = findObjectInventory(object);
+		if(obj != null) {
+			this.inventory.remove(obj);
+			this.getCurrentRoom().addObject(obj);
+		}
+		
+	}
+	
+	public void win(){
+		Projet.print("YOUHOUUUUUUU! MY DONUTS \n\n\n\n");
+		Projet.print("GAME FINISH; YOU WON!!");
 	}
 	
 	private boolean isCurrentLight() {
@@ -199,11 +216,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		((Barrel) object1).use(this, object2);
 		
 	}
-	
-	public void help() {
-		Projet.print("on est dans help");
-	}
-	
+		
 	public void quit() {
 		Projet.print("Really ? I'm always hungry, you want to RAGE QUIT ? ( enter q to quit)");
 		if(this.action.nextLine().equalsIgnoreCase("q")) {
@@ -258,6 +271,21 @@ public class Hero extends Character implements Attackable, Talkable{
 		return null;
 	}
 	
+	public void help() {
+		Projet.print("MENU \n"
+				+ "help:		 to know the different commands\n"
+				+ "inventory: 	 to show the inventory\n"
+				+ "use: 		 for use an object\n"
+				+"use object:	 for refill the barrel \n"
+				+"take object:   	 for take an object\n"
+				+"look:     	 to see what room are we in and see the objects in the room\n"
+				+"look object:  	 to know the information about the object\n"
+				+"attack:        	 to kill his opponent\n"
+				+"go room:  	 for to go in other room\n"
+				+"quit:    	 for exit the game\n");
+
+	}
+	
 	@Override
 	public void beAttacked(int damage) {
 		this.editHP(damage);	
@@ -299,7 +327,6 @@ public class Hero extends Character implements Attackable, Talkable{
 	public void talk() {
 		Talkable target = (Talkable)this.getCurrentRoom().getCharacters().get(0);
 		if(target != null && target instanceof Other) {
-			System.err.println(target.toString());
 			this.talkTo(target);
 		}
 		else

@@ -10,11 +10,6 @@ public class Enemy extends Character implements Attackable{
 		super(name);
 	}
 
-	@Override
-	public void specialPower() {
-		
-	}
-
 
 	@Override
 	public void beAttacked(int damage) {

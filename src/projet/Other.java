@@ -31,10 +31,6 @@ public class Other extends Character implements Talkable{
 		this.speechs.add(speech3);
 	}
 
-	@Override
-	public void specialPower() {
-		
-	}
 
 	@Override
 	public void talkTo(Talkable t) {
@@ -74,24 +70,24 @@ public class Other extends Character implements Talkable{
 			System.out.println("-Burns : REALLY ? (-_-)\n"
 					+ "-Samuel : OK OK je rigole je comptai pas leur mettre une salle note de toutes facons\n"
 					+ "        : je vais revoir ma note a la hausse, aller\n");
-			talkTo(t);
+			talkToBurns(t);
 		} else {
-			if(note > 7 && note < 15) {
+			if(note >= 7 && note < 15) {
 				System.out.println("-Burns : OHHHHH honestly, don't they deserve more ?\n"
-								 + "        I will give you only one digit : '1***'"
-								 + "-Samuel : Mmmmmmm, c'est vrai qu'ils meritent plus...");
-				talkTo(t);
+								 + "        I will give you only one digit : '1***'\n"
+								 + "-Samuel : Mmmmmmm, c'est vrai qu'ils meritent plus...\n");
+				talkToBurns(t);
 			} else {
-				if(note > 15 && note < 18) {
+				if(note >= 15 && note < 18) {
 					System.out.println("-Burns : frankly, it touches me thank you\n"
-									 + "+ \"        I will give you three digit : '170*'\""
+									 + "+ \"        I will give you three digit : '170*'\n"
 									 + "-Samuel : Okayyy, ils abusent un peu je trouve\n"
-									 + "        Mais c'est vrai que c'est bien foutu, aller je leurs met un 20/20");
-					talkTo(t);
+									 + "        Mais c'est vrai que c'est bien foutu, aller je leurs met un 20/20\n");
+					talkToBurns(t);
 				} else {
 					System.out.println("-Burns : WAAAAAW, you're the best Samuel ;) \n"
 							 		 + "        Take the code : '1703'\n"
-							 		 + "-Samuel : Tres bien, finissons-en (c'etait cool GG)");
+							 		 + "-Samuel : Tres bien, finissons-en (c'etait cool GG)\n");
 				}
 			}
 		}

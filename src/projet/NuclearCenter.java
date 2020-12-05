@@ -40,7 +40,7 @@ public class NuclearCenter {
 		input.next();
 		
 		System.out.println("\n\n===================================================================================================\n\n");
-		
+		System.out.println("Enter HELP to know the different commands");
 		Hero homer = new Hero("Homer");
 		// Homer a faim donc il est pas en pleinne forme
 		homer.beAttacked(-3);
@@ -143,9 +143,9 @@ public class NuclearCenter {
 		Object duff2 = new Duff();
 		Object duff3 = new Duff();
 		Object barrel= new Barrel();
-		Object flashlight = new Flashlight();
+		Object flashlight = new Lamp();
 		Object parchment = new Parchment();
-		Object treasure = new Treasure();
+		Object donuts = new Donuts();
 		
 		// MAJ des Rooms
 		homerDesk.addObject(new Duff());
@@ -167,7 +167,7 @@ public class NuclearCenter {
 		production.addEnemy(smithers, p_b);
 		production.addObject(duff3);
 		burnsDesk.addCharacter(burns);
-		burnsDesk.addObject(treasure);
+		safety.addObject(donuts);
 		
 	}
 }

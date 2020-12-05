@@ -67,9 +67,7 @@ public abstract class Character {
 	public String toString() {	
 		return this.name;
 	}
-	
-	public abstract void specialPower();
-	
+		
 	public void die() {
 		if( this.getHP() <= 0) {
 			System.out.println(this.getName() + " is dead !");

@@ -1,15 +1,15 @@
 package projet;
 
-public class Flashlight extends Object {
+public class Lamp extends Object {
 	
-	public Flashlight() {
-		super("Flashlight");
+	public Lamp() {
+		super("Lamp");
 	}
 
 	@Override
 	public String descriptif() {
 		
-		return "Flashlight, you can light up rooms with it";
+		return "Lamp, you can light up rooms with it";
 	}
 
 	@Override

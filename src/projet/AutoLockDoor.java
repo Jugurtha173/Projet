@@ -20,6 +20,9 @@ public class AutoLockDoor extends Door {
     public void open(){
         if( !(this.lock) ) {
         	super.open();
+        } else { 
+        	System.out.println("The door is locked! Use key to unlock.");
+        	
         }
     }
     
@@ -30,8 +33,11 @@ public class AutoLockDoor extends Door {
     }
     
     public void unLock(){
-        if( !(super.isState()))
+        if( !(super.isState())) {
             this.lock = false;
+            System.out.println("The door is now unlock! You can go.");
+        }
+        	
     }
 
     

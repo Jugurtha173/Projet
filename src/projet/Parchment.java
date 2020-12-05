@@ -37,7 +37,7 @@ public class Parchment extends Object {
 	
 	public String getdecryptedMessage() {
 		return "Hello Mr Burns,\n"
-				+ "If you are in the Aditorium, and you wan to came in my office,"
+				+ "If you are in the Aditorium, and you wan to came in my office\n"
 				+ "this is the code of door to Production :\n"
 				+ "'two two one zero'.\n"
 				+ "You can came whenever you want, you will find me inside.\n"

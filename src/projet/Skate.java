@@ -12,7 +12,7 @@ public class Skate extends Object{
     @Override
 	public String descriptif() {
 		
-		return this.toString();
+		return this.toString() +":  Dégats:" + this.getHealthEffect();
 	}
 
 	@Override
