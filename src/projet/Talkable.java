@@ -1,6 +1,10 @@
 package projet;
 
 public interface Talkable {
+	
+	public void talkTo(Talkable t);
+	
+	
 	// Speech des personnages
 	public static String speechOfLisa1 = ""
 			+ "-Lisa : Hello Dad, im learning new language called : KABYLE\n"
@@ -12,6 +16,7 @@ public interface Talkable {
 			+ "Can you please look at it and tell if you can read it\n"
 			+ "-Lisa : Oh... I see, Yes it's written in KABYLE, and i understand what it says\n "
 			+ "It's the code of the locked door to go to 'Production', so it says :\n";
+
 	public static String speechOfLisa3 = "I have to go, I'm hungry, LOVE you";
 
 	/***************************************************************************************************/
@@ -43,6 +48,58 @@ public interface Talkable {
 	
 	public static String speechOfBurns3 = "";
 		
+	/***************************************************************************************************/
 	
-	public void talkTo(Talkable t);
+	public static String speechOfMarge1 = "-Marge : MMMMMMM hello Homer\n"
+										+ "         I have something for you\n"
+										+ "         But berofe, kiss me...\n"
+										+ "-Homer : (Kiss marge/No ?) : ";
+	
+	public static String speechOfMarge2 = "-Marge : OHWOOOO! Mmmmmm, take this i'ts for you, Love you honey\n";
+	
+	public static String speechOfMarge3 = "-Marge : OH, GO OUT >:(\n";
+	
+	/***************************************************************************************************/
+	
+	public static String speechOfMoe1 = "-Moe : Hey Homer, I have a barrel full of beer\n"
+									  + "       You want it now ? ...\n"
+									  + "-Homer : (Yes/no ?) : ";
+	
+	public static String speechOfMoe2 = "-Moe : Take my friend\n"
+									  + "-Homer : Thank you Moe\n";
+	
+	public static String speechOfMoe3 = "-Moe : Mmmmmmmmm okay, maybe next time\n";
+	
+	/***************************************************************************************************/
+	
+	public static String speechOfWiggum1 = "-Homer : Oh ! Chef Clancy Wiggum, what are you doing here ?\n"
+										 + "-Wiggum: I am searching for Samuel Pel....heuuu....Tahiti Bob\n"
+										 + "-Wiggum: You want to help me ? ...\n"
+										 + "-Homer : (Yes/No ?) : ";
+	
+	public static String speechOfWiggum2 = "-Wiggum : Good take this gun and this key, and JUST DO IT !\n";
+	
+	public static String speechOfWiggum3 = "-Wiggum : Ok, I have to continue, see you\n";
+	
+	/***************************************************************************************************/
+	
+	public static String speechOfKrusty1 = "-Krusty: HE HE HE HA HE : DO YOU LOVE MY BURGERS ?...\n"
+										 + "-Homer : (Yes/No ?) : ";
+	
+	public static String speechOfKrusty2 = "-Krusty :  YES ! take this Burger and have lunch\n";
+	
+	public static String speechOfKrusty3 = "-Krusty : OKay man, it's okay\n";
+	
+	/***************************************************************************************************/
+	
+	public static String speechOfBart1 = "-Bart  : DAD! DAD! Please, Tahiti Bob want to kill me\n"
+									   + "-Homer : What ? Where is he ?\n"
+									   + "-Bart  : I escaped him in the B24, will you help me ?...\n"
+									   + "-Homer : (Yes/No ?) : ";
+	
+	public static String speechOfBart2 = "-Bart : Thank you dad, take my Skateboard, maybe it will be useful to you\n";
+	
+	public static String speechOfBart3 = "-Bart : ohhhhhh DAAAAAD you suck\n";
+	
+	
 }

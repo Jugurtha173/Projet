@@ -86,7 +86,7 @@ public class Room {
 			// sauf le hero (on sait deja qu'il est la)
 			if(!(perso instanceof Hero)) {
 				// si il est mort on affiche son cadavre
-				if(!(perso.isAlive)) detail += "OH ! The dead body of ";
+				if(!(perso.isAlive())) detail += "OH ! The dead body of ";
 				
 				detail += perso.toString() + " is here\n" ;
 				

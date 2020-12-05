@@ -9,7 +9,7 @@ import java.util.List;
  */
 public abstract class Character {
 	protected final static int MAX_HP = 20;
-	protected Boolean isAlive = true;
+	private Boolean alive = true;
 	private final String name;
 	private int HP;
 	private Room currentRoom;
@@ -31,12 +31,18 @@ public abstract class Character {
 		if(this.HP > MAX_HP){
 			this.HP = MAX_HP;
 		} else if (this.HP <= 0) {
-			this.isAlive = false;
+			this.alive = false;
 		}
+	}
+	
+	public Boolean isAlive() {
+		return this.alive;
 	}
 	
 	public void showHP() {
 		int level = this.getHP();
+		if(level < 0) level = 0;
+		
 		String hp = this.getName() + " HP : [";
 		for (int i = 0; i < MAX_HP; i++) {
 			if(i < level) {
@@ -62,6 +68,13 @@ public abstract class Character {
 		this.currentRoom = currentRoom;
 	}
 
+	public void dropAllInventory() {
+		for(Object obj : this.inventory) {
+			this.getCurrentRoom().addObject(obj);
+		}
+		this.inventory.clear();
+		
+	}
 	
 	@Override
 	public String toString() {	
@@ -70,8 +83,9 @@ public abstract class Character {
 		
 	public void die() {
 		if( this.getHP() <= 0) {
-			System.out.println(this.getName() + " is dead !");
-			this.isAlive = false;
+			System.err.println(this.getName() + " is dead !");
+			this.alive = false;
+			this.dropAllInventory();
 		}
 		
 	}

@@ -13,13 +13,14 @@ public class Hero extends Character implements Attackable, Talkable{
 	Scanner choice = new Scanner(System.in);
 	private boolean win = false;
 	private boolean quit = false;
+	private boolean cheat = false;
 
 	public Hero(String name) {
 		super(name);
 	}
 	
 	public void play() {
-		while (!win && !quit && this.isAlive) {
+		while (!win && !quit && this.isAlive()) {
 			String line = action.nextLine();
 			String[] argv = line.split(" ");
 			this.evalAction(argv);			
@@ -84,7 +85,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		case "attack": {
 			// si il n'y a pas d'ennemie ou que l'ennemie est mort
 			Enemy target = this.enemyInRoom();
-			if(target != null && !(target.isAlive)) {
+			if(target != null && !(target.isAlive())) {
 				Projet.print("No ennemy alive here ! you can go ");
 				break;
 			}
@@ -100,7 +101,10 @@ public class Hero extends Character implements Attackable, Talkable{
 			}
 			break;
 		}
-		
+		case "cheat": {
+			this.switchCheat();
+			break;
+		}
 		
 		default:
 			Projet.print("!!! Action incorrect !!!");
@@ -117,7 +121,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			// si c'est bien la Room qu'on veut
 			if(r.getName().split(" ")[0].equalsIgnoreCase(room)) {
 				// on verifie si il y a un ennemie
-				if(door.guard != null && door.guard.isAlive) {
+				if(door.guard != null && door.guard.isAlive()) {
 					door.guard.attack((Attackable)this);
 					return;
 				}
@@ -210,8 +214,17 @@ public class Hero extends Character implements Attackable, Talkable{
 	}
 	
 	public void use(String obj1, String obj2) {
-		Object object1 = findObject(obj1);
+		Object object1 = findObjectInventory(obj1);
+		if(object1 == null) {
+			System.err.println("You have no "+ object1 +" in your inventory");
+			return;
+		}
+		
 		Object object2 = findObjectInventory(obj2);
+		if(object2 == null) {
+			System.err.println("You have no "+ object2 +" in your inventory");
+			return;
+		}
 		
 		((Barrel) object1).use(this, object2);
 		
@@ -273,16 +286,18 @@ public class Hero extends Character implements Attackable, Talkable{
 	
 	public void help() {
 		Projet.print("MENU \n"
-				+ "help:		 to know the different commands\n"
-				+ "inventory: 	 to show the inventory\n"
-				+ "use: 		 for use an object\n"
-				+"use object:	 for refill the barrel \n"
-				+"take object:   	 for take an object\n"
-				+"look:     	 to see what room are we in and see the objects in the room\n"
-				+"look object:  	 to know the information about the object\n"
-				+"attack:        	 to kill his opponent\n"
-				+"go room:  	 for to go in other room\n"
-				+"quit:    	 for exit the game\n");
+				+"inventory: 	         Show the inventory\n"
+				+"use: 		         Use an object in your inventory (you'll choose which one)\n"
+				+"use object:	         Use the object (if it contains in inventory)\n"
+				+"use object1 object2:	 Use the object with the other one (ex. 'use barrel duff' to refill duff)\n"
+				+"take object:   	         Take an object\n"
+				+"drop object:   	         Drop an object from your inventory to the room\n"
+				+"look:     	         See everything arround you in the room\n"
+				+"look object:  	         To know more about the object\n"
+				+"attack:        	         Attack the enemy in the room (if you inventory is empty, you'll punch him)\n"
+				+"attack object:        	 Attack the enemy in the room with the object (if you have not the object, you'll punch him)\n"
+				+"go room:  	         Go in other room (if you can)\n"
+				+"quit:    	         Exit the game\n");
 
 	}
 	
@@ -310,6 +325,18 @@ public class Hero extends Character implements Attackable, Talkable{
 			
 			this.attack(target, null);
 		}
+		
+		// Cheat code
+		if(!this.cheat) {
+			target.attack(this);
+		}
+	}
+	
+	public void switchCheat() {
+		if(!this.cheat) Projet.print("!!! NOW when you attack an enemy, he will not attack back !!!");
+		else Projet.print("!!! NOW when you attack an enemy, he will attack back !!!");
+		
+		this.cheat = !this.cheat;
 	}
 
 	@Override

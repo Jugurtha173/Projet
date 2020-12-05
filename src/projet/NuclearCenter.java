@@ -112,15 +112,45 @@ public class NuclearCenter {
 		Door e_o = new Door(employee, operations);
 		Door p_b = new Door(production, burnsDesk);
 		SecretCodeDoor b_safety = new SecretCodeDoor(burnsDesk, safety);
+		
+		// creation des objets
+		Object skate = new Skate();
+		Object hamburger = new Hamburger();
+		Object key = new Key();
+		Object duff1 = new Duff();
+		Object duff2 = new Duff();
+		Object duff3 = new Duff();
+		Object barrel= new Barrel();
+		Object lamp = new Lamp();
+		Object parchment = new Parchment();
+		Object donuts = new Donuts();
 			
 		
 		// creation des personnages
-		Character moe = new Other("Moe");
-		Character marge = new Other("Marge");
-		Character wiggum = new Other("Wiggum");
-		Character krusty = new Other("Krusty");
+		Other moe = new Other("Moe");
+		moe.addSpeechs(Talkable.speechOfMoe1, Talkable.speechOfMoe2, Talkable.speechOfMoe3);
+		moe.inventory.add(barrel);
+		
+		Other marge = new Other("Marge", "kiss");
+		marge.addSpeechs(Talkable.speechOfMarge1, Talkable.speechOfMarge2, Talkable.speechOfMarge3);
+		marge.inventory.add(new  Duff());
+		
+		Other wiggum = new Other("Wiggum");
+		wiggum.addSpeechs(Talkable.speechOfWiggum1, Talkable.speechOfWiggum2, Talkable.speechOfWiggum3);
+		wiggum.inventory.add(new  Gun());
+		wiggum.inventory.add(key);
+		
+		Other krusty = new Other("Krusty");
+		krusty.addSpeechs(Talkable.speechOfKrusty1, Talkable.speechOfKrusty2, Talkable.speechOfKrusty3);
+		krusty.inventory.add(hamburger);
+		
+		Other bart = new Other("Bart");
+		bart.addSpeechs(Talkable.speechOfBart1, Talkable.speechOfBart2, Talkable.speechOfBart3);
+		bart.inventory.add(skate);
+		
 		Other lisa = new Other("Lisa");
 		lisa.addSpeechs(Talkable.speechOfLisa1, Talkable.speechOfLisa2, Talkable.speechOfLisa3);
+		
 		Other burns= new Other("Mr Burns");
 		burns.addSpeechs(Talkable.speechOfBurns1, Talkable.speechOfBurns2, Talkable.speechOfBurns3);
 		
@@ -131,42 +161,46 @@ public class NuclearCenter {
 		tahiti_Bob.inventory.add(new Knife());
 
 		Enemy kang_kodos = new Enemy("Kang & Kodos");
-		Enemy nelson = new Enemy("Nelson");
-		Enemy smithers= new Enemy("Smithers");
+		kang_kodos.inventory.add(new Uranium());
 		
-		// creation des objets
-		Object skate = new Skate();
-		Object knife = new Knife();
-		Object hamburger = new Hamburger();
-		Object key = new Key();
-		Object duff1 = new Duff();
-		Object duff2 = new Duff();
-		Object duff3 = new Duff();
-		Object barrel= new Barrel();
-		Object flashlight = new Lamp();
-		Object parchment = new Parchment();
-		Object donuts = new Donuts();
+		Enemy nelson = new Enemy("Nelson");
+		
+		Enemy smithers= new Enemy("Smithers");
+		smithers.inventory.add(new Gun());
+		
 		
 		// MAJ des Rooms
 		homerDesk.addObject(new Duff());
-		hall.addObject(skate);
+		
+		hall.addCharacter(bart);
 		hall.addObject(duff1);
-		control.addObject(key);
-		control.addObject(flashlight);
+		
 		control.addCharacter(wiggum);
+		control.addObject(lamp);
+		
 		b24.addEnemy(tahiti_Bob, b_k);
+		
 		rest.addCharacter(marge);
+		
 		moes.addCharacter(moe);
-		moes.addObject(barrel);
+		
 		storage.addObject(parchment);
+		
 		kitchen.addCharacter(krusty);
+		
 		operations.addEnemy(kang_kodos, m_o);
+		
 		employee.addEnemy(nelson, e_o);
+		
 		auditorium.addCharacter(lisa);
+		
 		engine.addObject(duff2);
+		
 		production.addEnemy(smithers, p_b);
 		production.addObject(duff3);
+		
 		burnsDesk.addCharacter(burns);
+		
 		safety.addObject(donuts);
 		
 	}

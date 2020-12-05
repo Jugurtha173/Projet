@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Other extends Character implements Talkable{
 
 	public final List<String> speechs = new ArrayList<>();
-	private String condition;
+	private String condition = "yes";
 	Scanner interact = new Scanner(System.in);
 	
 	public Other(String name, String condition) {
@@ -44,6 +44,7 @@ public class Other extends Character implements Talkable{
 		else {
 			if (condition.equalsIgnoreCase(interact.nextLine().split(" ")[0])) {
 				Projet.print(this.speechs.get(1));
+				this.dropAllInventory();
 			} else {
 				Projet.print(this.speechs.get(2));
 			}
