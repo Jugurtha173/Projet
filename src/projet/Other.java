@@ -31,7 +31,7 @@ public class Other extends Character implements Talkable{
 
 	@Override
 	public void talkTo(Talkable t) {
-		Projet.print(this.speechs.get(0));
+		NuclearCentral.print(this.speechs.get(0));
 		if (this.getName().equalsIgnoreCase("Lisa")) 
 			this.talkToLisa(t);
 		else
@@ -40,10 +40,10 @@ public class Other extends Character implements Talkable{
 		
 		else {
 			if (condition.equalsIgnoreCase(interact.nextLine().split(" ")[0])) {
-				Projet.print(this.speechs.get(1));
+				NuclearCentral.print(this.speechs.get(1));
 				this.dropAllInventory();
 			} else {
-				Projet.print(this.speechs.get(2));
+				NuclearCentral.print(this.speechs.get(2));
 			}
 		}		
 	}
@@ -53,12 +53,12 @@ public class Other extends Character implements Talkable{
 		for(Object obj : inv) {
 			if(obj instanceof Parchment) {
 				((Parchment)obj).decrypt();
-				Projet.print(this.speechs.get(1));
-				Projet.print(obj.descriptif());	
+				NuclearCentral.print(this.speechs.get(1));
+				NuclearCentral.print(obj.descriptif());	
 				return;
 			}
 		}
-		Projet.print(this.speechs.get(2));
+		NuclearCentral.print(this.speechs.get(2));
 
 	}
 	

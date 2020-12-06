@@ -33,7 +33,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			try {		
 				this.go(argv[1]);
 			} catch (ArrayIndexOutOfBoundsException e) {
-				Projet.print("Where do want to go ?");
+				NuclearCentral.print("Where do want to go ?");
 			}
 			break;
 		}
@@ -69,7 +69,7 @@ public class Hero extends Character implements Attackable, Talkable{
 				try {
 					this.use(argv[1]);
 				} catch (ArrayIndexOutOfBoundsException e1) {
-					Projet.print("Use what ?");
+					NuclearCentral.print("Use what ?");
 				}
 			}
 			break;
@@ -86,7 +86,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			// si il n'y a pas d'ennemie ou que l'ennemie est mort
 			Enemy target = this.enemyInRoom();
 			if(target != null && !(target.isAlive())) {
-				Projet.print("No ennemy alive here ! you can go ");
+				NuclearCentral.print("No ennemy alive here ! you can go ");
 				break;
 			}
 				
@@ -107,7 +107,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		}
 		
 		default:
-			Projet.print("!!! Action incorrect !!!");
+			NuclearCentral.print("!!! Action incorrect !!!");
 		}
 	}
 	
@@ -140,7 +140,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			
 		}
 		// ici on a donc pas trouvé la Room
-		Projet.print("!!! Room not found !!!");
+		NuclearCentral.print("!!! Room not found !!!");
 		
 	}
 	
@@ -148,7 +148,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		this.getCurrentRoom().removeCharacter(this);
 		this.setCurrentRoom(room);
 		room.addCharacter(this);
-		Projet.print("!!! Room changed !!!");
+		NuclearCentral.print("!!! Room changed !!!");
 	}
 
 	public void take(String object) {
@@ -157,7 +157,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			if(obj != null) {
 				this.inventory.add(obj);
 				this.getCurrentRoom().getObjects().remove(obj);
-				Projet.print(object.toString() + " takken");
+				NuclearCentral.print(object.toString() + " takken");
 			}
 			if(obj instanceof Donuts) {
 				this.win = true;
@@ -176,15 +176,15 @@ public class Hero extends Character implements Attackable, Talkable{
 	}
 	
 	public void win(){
-		Projet.print("YOUHOUUUUUUU! MY DONUTS \n\n\n\n");
-		Projet.print("GAME FINISH; YOU WON!!");
+		NuclearCentral.print("YOUHOUUUUUUU! MY DONUTS \n\n\n\n");
+		NuclearCentral.print("GAME FINISH; YOU WON!!");
 	}
 	
 	private boolean isCurrentLight() {
 		if(this.getCurrentRoom().isLigth) {
 			return true;
 		} else {
-			Projet.print("Hmmmm !!! Can't see anything, this room is not enlightened");
+			NuclearCentral.print("Hmmmm !!! Can't see anything, this room is not enlightened");
 			return false;
 		}
 	}
@@ -192,7 +192,7 @@ public class Hero extends Character implements Attackable, Talkable{
 	public void look() {
 		this.showHP();
 		if(this.isCurrentLight())
-			Projet.print(this.getCurrentRoom().descriptif());			
+			NuclearCentral.print(this.getCurrentRoom().descriptif());			
 		
 	}
 
@@ -200,9 +200,9 @@ public class Hero extends Character implements Attackable, Talkable{
 		if(this.isCurrentLight()) {
 			Object obj = findObject(object);
 			if(obj != null) 
-				Projet.print(obj.descriptif());
+				NuclearCentral.print(obj.descriptif());
 			else
-				Projet.print("!!! There's no " + object + " here !!!");	
+				NuclearCentral.print("!!! There's no " + object + " here !!!");	
 		}
 	}
 	
@@ -231,13 +231,13 @@ public class Hero extends Character implements Attackable, Talkable{
 	}
 		
 	public void quit() {
-		Projet.print("Really ? I'm always hungry, you want to RAGE QUIT ? ( enter q to quit)");
+		NuclearCentral.print("Really ? I'm always hungry, you want to RAGE QUIT ? ( enter q to quit)");
 		if(this.action.nextLine().equalsIgnoreCase("q")) {
 			this.quit  = true;
-			Projet.print("Okay! See you ");
+			NuclearCentral.print("Okay! See you ");
 			return;
 		}
-		Projet.print("Thank you ! We go back");
+		NuclearCentral.print("Thank you ! We go back");
 	}
 	 	
 	public Object findObject(String object) {
@@ -248,7 +248,7 @@ public class Hero extends Character implements Attackable, Talkable{
 				return obj;
 			}
 		}
-		Projet.print("!!! No " + object + " found here !!!");
+		NuclearCentral.print("!!! No " + object + " found here !!!");
 		return null;
 	}
 	
@@ -260,16 +260,16 @@ public class Hero extends Character implements Attackable, Talkable{
 				return obj;
 			}
 		}
-		Projet.print("!!! No " + object + " in your inventory !!!");
+		NuclearCentral.print("!!! No " + object + " in your inventory !!!");
 		return null;
 	}
 
 	public void showInventory() {
 		if(this.inventory.size() < 0) {
-			Projet.print("!!! Inventory is empty !!!");
+			NuclearCentral.print("!!! Inventory is empty !!!");
 		} else {
 			for(Object obj : this.inventory ) {
-				Projet.print(obj.toString());
+				NuclearCentral.print(obj.toString());
 			}
 		}
 	}
@@ -285,8 +285,9 @@ public class Hero extends Character implements Attackable, Talkable{
 	}
 	
 	public void help() {
-		Projet.print("MENU \n"
+		NuclearCentral.print("MENU \n"
 				+"inventory: 	         Show the inventory\n"
+				+"talk:                    Talk with other persons in the room(Not enemies)\n"
 				+"use: 		         Use an object in your inventory (you'll choose which one)\n"
 				+"use object:	         Use the object (if it contains in inventory)\n"
 				+"use object1 object2:	 Use the object with the other one (ex. 'use barrel duff' to refill duff)\n"
@@ -313,7 +314,7 @@ public class Hero extends Character implements Attackable, Talkable{
 	public void attack(Attackable target) {
 		// l'ennemie attack la cible avec son invetaire si ce dernier n'est pas vide
 		if(this.inventory.size() != 0) {
-			Projet.print("What do you want to use to attack");
+			NuclearCentral.print("What do you want to use to attack");
 			this.showInventory();
 			
 			String s = choice.next();
@@ -333,8 +334,8 @@ public class Hero extends Character implements Attackable, Talkable{
 	}
 	
 	public void switchCheat() {
-		if(!this.cheat) Projet.print("!!! NOW when you attack an enemy, he will not attack back !!!");
-		else Projet.print("!!! NOW when you attack an enemy, he will attack back !!!");
+		if(!this.cheat) NuclearCentral.print("!!! NOW when you attack an enemy, he will not attack back !!!");
+		else NuclearCentral.print("!!! NOW when you attack an enemy, he will attack back !!!");
 		
 		this.cheat = !this.cheat;
 	}
@@ -342,7 +343,7 @@ public class Hero extends Character implements Attackable, Talkable{
 	@Override
 	public void attack(Attackable target, Object object) {
 		if (object == null) {
-			Projet.print("let's punch him");
+			NuclearCentral.print("let's punch him");
 			target.beAttacked(-1);
 		} else {
 			target.beAttacked(object.getHealthEffect());

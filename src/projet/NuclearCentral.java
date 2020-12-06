@@ -4,9 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class NuclearCenter {
+public class NuclearCentral {
 	
 	private List<Room> Rooms = new ArrayList<>();
+	
+    public static void main(String[] args) {
+    	
+    	NuclearCentral nc = new NuclearCentral();
+    	nc.start();
+        
+    }
 
 	
 	public void start() {
@@ -17,7 +24,7 @@ public class NuclearCenter {
 		
 		Scanner input = new Scanner(System.in);
 		
-		Projet.print(""
+		NuclearCentral.print(""
 				+ "Welcome to Homer's Adventure\n"
 				+ "A game created by:\n"
 				+ "Hylia BOUDAHBA\n"
@@ -28,7 +35,7 @@ public class NuclearCenter {
 		
 		input.next();
 		
-		Projet.print(""
+		NuclearCentral.print(""
 				+ "Homer is in his office entrin to ... 'Work' \n"
 				+ "Suddenly ... he's hungry!\n"
 				+ "But Mr Burns confiscated his DONUT\n"
@@ -53,7 +60,6 @@ public class NuclearCenter {
 
 	}
 	
-
 	public void init() {
 		// initialisation
 
@@ -204,4 +210,13 @@ public class NuclearCenter {
 		safety.addObject(donuts);
 		
 	}
+
+	public static void print(String s) {
+    	for(int i = 0; i < s.length(); i++) {
+    		System.out.print(s.charAt(i));
+    		try { Thread.sleep(5);}
+    		catch (InterruptedException e) {}
+    	}
+    	System.out.println();
+    }
 }
