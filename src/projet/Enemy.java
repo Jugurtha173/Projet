@@ -9,10 +9,10 @@ public class Enemy extends Character implements Attackable{
 
 	@Override
 	public void beAttacked(int damage) {
-		if (damage < 0 ) {
-			damage = -damage;
-			this.editHP(damage);
+		if (damage > 0 ) {
+			damage = -damage;			
 		}
+		this.editHP(damage);
 		this.showHP();
 		// on verifie le hero est toujours vivant
 		this.die();

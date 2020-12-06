@@ -157,7 +157,7 @@ public class Hero extends Character implements Attackable, Talkable{
 			if(obj != null) {
 				this.inventory.add(obj);
 				this.getCurrentRoom().getObjects().remove(obj);
-				NuclearCentral.print(object.toString() + " takken");
+				NuclearCentral.print(object.toString() + " taken");
 			}
 			if(obj instanceof Donuts) {
 				this.win = true;
@@ -293,7 +293,7 @@ public class Hero extends Character implements Attackable, Talkable{
 				+"use object1 object2:	 Use the object with the other one (ex. 'use barrel duff' to refill duff)\n"
 				+"take object:   	         Take an object\n"
 				+"drop object:   	         Drop an object from your inventory to the room\n"
-				+"look:     	         See everything arround you in the room\n"
+				+"look:     	         See everything around you in the room\n"
 				+"look object:  	         To know more about the object\n"
 				+"attack:        	         Attack the enemy in the room (if you inventory is empty, you'll punch him)\n"
 				+"attack object:        	 Attack the enemy in the room with the object (if you have not the object, you'll punch him)\n"

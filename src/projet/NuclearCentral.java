@@ -36,7 +36,7 @@ public class NuclearCentral {
 		input.next();
 		
 		NuclearCentral.print(""
-				+ "Homer is in his office entrin to ... 'Work' \n"
+				+ "Homer is in his office ... 'Working' \n"
 				+ "Suddenly ... he's hungry!\n"
 				+ "But Mr Burns confiscated his DONUT\n"
 				+ "DOH !!!\n"
