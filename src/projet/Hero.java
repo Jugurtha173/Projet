@@ -180,7 +180,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		NuclearCentral.print("GAME FINISH; YOU WON!!");
 	}
 	
-	private boolean isCurrentLight() {
+	public boolean isCurrentLight() {
 		if(this.getCurrentRoom().isLigth) {
 			return true;
 		} else {
