@@ -23,19 +23,19 @@ public class Enemy extends Character implements Attackable{
 		String detail = "DOH ! you've been attacked by "+ this.getName()+ ", with a ";
 		// l'ennemie attack la cible avec le premier objet de son invetaire si ce dernier n'est pas vide
 		if(this.inventory.size() != 0) {
-			detail += inventory.get(0).toString() + ", " + this.inventory.get(0).getHealthEffect() ;
+			detail += inventory.get(0).toString() + ", " + ((this.inventory.get(0).getHealthEffect() * 100) / Character.MAX_HP) ;
 			target.beAttacked(this.inventory.get(0).getHealthEffect());		
 			// on perds le premier objet de l'inventaire
 			this.getCurrentRoom().addObject(this.inventory.get(0));
-			this.inventory.remove(0);
+			this.inventory.remove(this.inventory.get(0));
 		} else {
 			// sinon on frappe la cible avec un coup-de-poing ( un coup-de-poing implique -1 point de vie)
-			detail += " punch -1";
+			detail += " punch -5";
 			target.beAttacked(-1);
 		}
 		
 		
-		detail += " HP, you must kill him before !";
+		detail += "% HP, you must kill him before !";
 		System.out.println(detail);
 	}
 
