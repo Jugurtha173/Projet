@@ -29,7 +29,7 @@ public class Enemy extends Character implements Attackable{
 			this.getCurrentRoom().addObject(this.inventory.get(0));
 			this.inventory.remove(this.inventory.get(0));
 		} else {
-			// sinon on frappe la cible avec un coup-de-poing ( un coup-de-poing implique -1 point de vie)
+			// sinon on frappe la cible avec un coup-de-poing ( un coup-de-poing implique -5% de points de vie)
 			detail += " punch -5";
 			target.beAttacked(-1);
 		}

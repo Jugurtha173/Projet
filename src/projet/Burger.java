@@ -7,7 +7,7 @@ package projet;
 public class Burger extends Object{
 
 	public Burger() {
-		super("Burger", +3);
+		super("Burger", 3);
 	}
 	
 	@Override
@@ -19,6 +19,8 @@ public class Burger extends Object{
 	@Override
 	public void use(Character c) {
 		c.editHP(this.getHealthEffect());
+		System.out.println("Eating burger ...");
+		c.inventory.remove(this);
 	}
     
 }

@@ -57,7 +57,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		case "drop":{
 			try {
 				this.drop(argv[1]);
-			} catch (Exception e) {
+			} catch (ArrayIndexOutOfBoundsException e) {
 				System.out.println("You can drop an Object in your inventory");
 			}
 			break;
