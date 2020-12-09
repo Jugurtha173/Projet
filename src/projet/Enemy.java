@@ -26,6 +26,7 @@ public class Enemy extends Character implements Attackable{
 			detail += inventory.get(0).toString() + ", " + this.inventory.get(0).getHealthEffect() ;
 			target.beAttacked(this.inventory.get(0).getHealthEffect());		
 			// on perds le premier objet de l'inventaire
+			this.getCurrentRoom().addObject(this.inventory.get(0));
 			this.inventory.remove(0);
 		} else {
 			// sinon on frappe la cible avec un coup-de-poing ( un coup-de-poing implique -1 point de vie)

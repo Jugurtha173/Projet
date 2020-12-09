@@ -55,7 +55,11 @@ public class Hero extends Character implements Attackable, Talkable{
 			break;
 		}
 		case "drop":{
-			this.drop(argv[1]);
+			try {
+				this.drop(argv[1]);
+			} catch (Exception e) {
+				System.out.println("You can drop an Object in your inventory");
+			}
 			break;
 		}
 		case "quit": {
@@ -132,14 +136,14 @@ public class Hero extends Character implements Attackable, Talkable{
 					this.changeRoom(r);
 					door.close();
 				}
-				// on regarde ou on a attérit
+				// on regarde ou on a attï¿½rit
 				this.look();
 				// c'est bon on sort de la methode
 				return;		
 			}
 			
 		}
-		// ici on a donc pas trouvé la Room
+		// ici on a donc pas trouvï¿½ la Room
 		NuclearCentral.print("!!! Room not found !!!");
 		
 	}
