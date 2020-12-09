@@ -21,6 +21,7 @@ public class Hero extends Character implements Attackable, Talkable{
 	
 	public void play() {
 		while (!win && !quit && this.isAlive()) {
+			System.out.print("$>");
 			String line = action.nextLine();
 			String[] argv = line.split(" ");
 			this.evalAction(argv);			
@@ -175,6 +176,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		if(obj != null) {
 			this.inventory.remove(obj);
 			this.getCurrentRoom().addObject(obj);
+			System.out.println(object + " dropped");
 		}
 		
 	}

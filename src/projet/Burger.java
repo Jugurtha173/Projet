@@ -19,7 +19,7 @@ public class Burger extends Object{
 	@Override
 	public void use(Character c) {
 		c.editHP(this.getHealthEffect());
-		System.out.println("Eating burger ...");
+		System.out.println("Eating burger ... YES !");
 		c.inventory.remove(this);
 	}
     
