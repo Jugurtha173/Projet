@@ -2,10 +2,6 @@ package projet;
 
 import java.util.Scanner;
 
-/**
- *
- * @author JUGURTHA
- */
 public class SecretCodeDoor extends AutoLockDoor{
     
     private final int SECRET_CODE;

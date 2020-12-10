@@ -1,9 +1,5 @@
 package projet;
 
-/**
- *
- * @author JUGURTHA
- */
 public class Duff extends Object{
 	
 	private boolean full = true;

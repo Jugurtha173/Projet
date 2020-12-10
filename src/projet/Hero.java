@@ -14,7 +14,7 @@ public class Hero extends Character implements Attackable, Talkable{
 	private boolean win = false;
 	private boolean quit = false;
 	private boolean cheat = false;
-
+	
 	public Hero(String name) {
 		super(name);
 	}
@@ -116,6 +116,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		}
 	}
 	
+	//aller dans une salle
 	public void go(String room) {
 		// la liste des portes de la Room actuelle
 		List<Door> ld = this.getCurrentRoom().getDoors();
@@ -149,13 +150,15 @@ public class Hero extends Character implements Attackable, Talkable{
 		
 	}
 	
+	//changer de salle
 	public void changeRoom(Room room) {
 		this.getCurrentRoom().removeCharacter(this);
 		this.setCurrentRoom(room);
 		room.addCharacter(this);
 		NuclearCentral.print("!!! Room changed !!!");
 	}
-
+	
+	//prendre un objet
 	public void take(String object) {
 		if(this.isCurrentLight()) {
 			Object obj = findObject(object);
@@ -171,6 +174,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		}
 	}
 	
+	//deposer un objet
 	public void drop(String object) {
 		Object obj = findObjectInventory(object);
 		if(obj != null) {
@@ -181,11 +185,14 @@ public class Hero extends Character implements Attackable, Talkable{
 		
 	}
 	
+	
+	//gagner la partie
 	public void win(){
 		NuclearCentral.print("YOUHOUUUUUUU! MY DONUTS \n\n\n\n");
 		NuclearCentral.print("GAME FINISH; YOU WON!!");
 	}
 	
+	//test si une salle est eclairee ou non
 	public boolean isCurrentLight() {
 		if(this.getCurrentRoom().isLigth) {
 			return true;
@@ -195,13 +202,15 @@ public class Hero extends Character implements Attackable, Talkable{
 		}
 	}
 	
+	//regarder ou on se trouve
 	public void look() {
 		this.showHP();
 		if(this.isCurrentLight())
 			NuclearCentral.print(this.getCurrentRoom().descriptif());			
 		
 	}
-
+	
+	//regarder un objet
 	public void look(String object) {
 		if(this.isCurrentLight()) {
 			Object obj = findObject(object);
@@ -212,6 +221,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		}
 	}
 	
+	//utiliser un objet
 	public void use(String object) {
 		Object obj = findObjectInventory(object);
 		if(obj != null) {
@@ -219,6 +229,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		}
 	}
 	
+	//utiliser un objet avec un autre
 	public void use(String obj1, String obj2) {
 		Object object1 = findObjectInventory(obj1);
 		if(object1 == null) {
@@ -235,7 +246,8 @@ public class Hero extends Character implements Attackable, Talkable{
 		((Barrel) object1).use(this, object2);
 		
 	}
-		
+	
+	//quitter la partie
 	public void quit() {
 		NuclearCentral.print("Really ? I'm always hungry, you want to RAGE QUIT ? ( enter q to quit)");
 		if(this.action.nextLine().equalsIgnoreCase("q")) {
@@ -246,6 +258,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		NuclearCentral.print("Thank you ! We go back");
 	}
 	 	
+	//trouver une objet dans la salle
 	public Object findObject(String object) {
 		// la liste d'objets de la Room actuelle
 		List<Object> lo = this.getCurrentRoom().getObjects();
@@ -258,6 +271,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		return null;
 	}
 	
+	//retourne un objet dans l'inventaire 
 	public Object findObjectInventory(String object) {
 		// la liste d'objets de la Room actuelle
 		List<Object> lo = this.inventory;
@@ -269,7 +283,8 @@ public class Hero extends Character implements Attackable, Talkable{
 		NuclearCentral.print("!!! No " + object + " in your inventory !!!");
 		return null;
 	}
-
+	
+	//voir l'inventaire
 	public void showInventory() {
 		if(this.inventory.size() < 0) {
 			NuclearCentral.print("!!! Inventory is empty !!!");
@@ -279,7 +294,8 @@ public class Hero extends Character implements Attackable, Talkable{
 			}
 		}
 	}
-
+	
+	//retourne l'ennemie qui est dans la salle
 	public Enemy enemyInRoom() {
 		List<Character> chars = this.getCurrentRoom().getCharacters();
 		for(Character c : chars) {
@@ -290,6 +306,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		return null;
 	}
 	
+	// commande help  affiche la liste de commandes disponibles
 	public void help() {
 		NuclearCentral.print("MENU \n"
 				+"inventory: 	         Show the inventory\n"
@@ -307,6 +324,8 @@ public class Hero extends Character implements Attackable, Talkable{
 				+"quit:    	         Exit the game\n");
 
 	}
+	
+	
 	
 	@Override
 	public void beAttacked(int damage) {
@@ -339,6 +358,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		}
 	}
 	
+	//mode triche
 	public void switchCheat() {
 		if(!this.cheat) NuclearCentral.print("!!! NOW when you attack an enemy, he will not attack back !!!");
 		else NuclearCentral.print("!!! NOW when you attack an enemy, he will attack back !!!");
@@ -358,6 +378,7 @@ public class Hero extends Character implements Attackable, Talkable{
 		
 	}
 	
+	//parler avec un personnage
 	public void talk() {
 		Character target = this.getCurrentRoom().getCharacters().get(0);
 		if(target != null && target instanceof Other) {

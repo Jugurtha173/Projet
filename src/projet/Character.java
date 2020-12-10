@@ -3,12 +3,9 @@ package projet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author JUGURTHA
- */
 public abstract class Character {
 	protected final static int MAX_HP = 20;
+	public static final String DEFAULT_NAME = "UNKNOWN";
 	private Boolean alive = true;
 	private final String name;
 	private int HP;
@@ -16,6 +13,10 @@ public abstract class Character {
 	
 	
 	List<Object> inventory = new ArrayList<>();
+	
+	public Character() {
+		this.name = DEFAULT_NAME;
+	}
 	
 	public Character(String name) {
 		this.name = name;

@@ -21,55 +21,67 @@ public class Room {
 		this.isLigth = light;
 	}
 	
+	//allume la lumiere
  	public void lightUp() {
 		this.isLigth = true;
 		System.out.println("Room is now enlightened!");
 	}
 	
+ 	//ajoute un personnage
 	public void addCharacter(Character character) {
 		this.characters.add(character);
 		character.setCurrentRoom(this);
 	}
 	
+	//supprime un personnage
 	public void removeCharacter(Character character) {
 		this.characters.remove(character);
 	}
 	
+	//attribue un garde a une porte 
 	public void addEnemy(Enemy guard, Door door) {
 		this.addCharacter(guard);
 		door.guard = guard;
 	}
 	
+	//ajout d'une porte a la liste de portes
 	public void addDoor(Door door) {
 		this.doors.add(door);
 	}
 	
+	//ajout d'un objet a la liste d'objets
 	public void addObject(Object object) {
 		objects.add(object);
 	}
 	
+	//retourne le nom
 	public String getName() {
 		return name;
 	}
 	
+	//retourne la liste de portes
 	public List<Door> getDoors() {
 		return doors;
 	}
 	
+	//retourne la liste d'objets
 	public List<Object> getObjects() {
 		return this.objects;
 	}
 	
+	//retourne la lise de personnage
 	public List<Character> getCharacters(){
 		return this.characters;
 	}
 	
+	//indique dans quelle salle sommes nous
 	@Override
 	public String toString() {
 		
 		return "Your are in the " + this.name + "\n";
 	}
     
+	//affiche un descriptif de la salle
 	public String descriptif() {
 		
 		String detail = this.toString() + "\n";

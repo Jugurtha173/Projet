@@ -1,9 +1,5 @@
 package projet;
 
-/**
- *
- * @author JUGURTHA
- */
 public class ClosedDoor extends Door{
     
     

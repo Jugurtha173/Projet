@@ -1,9 +1,5 @@
 package projet;
 
-/**
- *
- * @author JUGURTHA
- */
 public class Burger extends Object{
 
 	public Burger() {

@@ -1,9 +1,5 @@
 package projet;
 
-/**
- *
- * @author JUGURTHA
- */
 public class AutoLockDoor extends Door {
     
     private boolean lock = true;

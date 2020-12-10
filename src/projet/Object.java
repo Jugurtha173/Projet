@@ -23,7 +23,7 @@ package projet;
     	return this.name;
     }
 
-	public abstract String descriptif();
+    public abstract String descriptif();
 	    
     public abstract void use(Character c);
 
